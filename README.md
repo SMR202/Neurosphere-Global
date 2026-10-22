@@ -1,67 +1,56 @@
-# NeuroSphere Global — Phase 1
+# NeuroSphere
 
-A Next.js App Router website built from the complete `NEUROSPHERE_GLOBAL_PHASE1_MASTER_BUILD_BRIEF.md`, copied into this folder from the supplied source. The brief controls scientific content and scope.
+Next.js website combining the original approved research website, the linked Phase 1 Google Doc and the October 2026 ready-to-paste copy. The DOCX supplies the current brand presentation and new learning/institute sections; it does not erase previously approved research or people. Source snapshots and the exact DOCX are retained in `content/source/`. See `design/CONTENT-RECONCILIATION.md` for the source decisions.
 
 ## Run
 
-Use Node.js 22.13 or later (24 LTS recommended) and npm.
+Use Node.js 24 LTS and npm:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. For production:
+Open http://127.0.0.1:3000. For an optimized preview:
 
 ```sh
 npm run build
 npm start
 ```
 
-The local scripts bind to loopback. For deployment, use a Next.js-compatible Node host or adapt its start command to the host's required interface and port. This project requires a server for enquiries; it is not a static export.
+Scripts bind to loopback. A public Next.js host must provide its normal interface/port configuration. This reconciled revision has not been deployed; the supplied Vercel URL was used as an older reference.
 
-## Included
+## Content and pages
 
-- Six routes: home, research/resources, datasets, projects, team, contact.
-- Searchable resource library, shareable domain filters, 21 official external resource links, and the supplied guidance/FAQ topics.
-- All 15 supplied projects, with exact titles, statuses, summaries and DOI identifiers; accessible status filters.
-- Full supplied lead biography and explicit TBD fields for the second member.
-- Dataset empty state and typed listing ready for approved entries.
-- Responsive navigation, keyboard focus handling, skip link, reduced-motion support, form validation and accessible status messages.
-- Server-rendered pages, small interactive client components, optimized locally served fonts/art, page metadata, social preview, favicon, robots and sitemap.
+The site includes 61 English page addresses and corresponding `/ur` interface previews: the supplied main pages, 11 course pages, 12 programme pages, 10 health-topic pages, six planned article pages, roadmap, student/research applications, waitlist and legal holding pages, plus the restored projects/publications, resources and datasets. Main page browser titles and meta descriptions match the DOCX exactly. `/projects` and `/datasets` are real pages again; `/team` redirects to `/people`. Old `/research?domain=…` links reach the resource library at `/research/resources?domain=…`.
 
-## Enquiries and launch configuration
+`src/content/client.ts` references the verbatim extracted paragraphs. `src/content/forms.ts` defines the six form types and supplied confirmation messages. Add approved scientific content to the source model; do not invent article text, programme details, affiliations or clinical claims to fill gaps. Source-only editorial instructions are not rendered as page copy.
 
-Copy `.env.example` to `.env.local`. Do not commit secrets.
+## Items needed before publication
 
-With no delivery configuration, the form validates and prepares a downloadable text draft in the browser. **It does not send the enquiry.** No form data is persisted by the application. The UI states this before entry and after preparation.
+The DOCX still contains unanswered fields for course hours, durations, fees, dates, teachers, physician reviewers, emergency/crisis numbers, official emails, reply time, hub city, registered entity and legal text. Public-facing display copy uses honest forthcoming wording rather than brackets; source text remains intact. The original team biographies, 15 project records and all 21 original resource links are restored, with the Google Doc additions. Dr. Mirza Obaid Baig's title/biography are still unknown and are not invented. Health guides remain clearly identified as drafts awaiting physician review and local emergency contacts.
 
-To enable submission, provide both `CONTACT_WEBHOOK_URL` (HTTPS only) and `CONTACT_WEBHOOK_TOKEN`. The server POSTs JSON `{ source: "NeuroSphere Global", enquiry: { name, email, institution, type, area, message } }` with a Bearer authorization header. Connect this endpoint to your chosen delivery system and verified recipient; return 2xx only after accepting the enquiry. Credentials remain on the server. No destination or email address has been invented.
+The supplied Urdu table contains no translations. Draft key navigation/button translations are maintained in `src/lib/locale.ts`, labelled as a preview and awaiting native-speaker review. The layout switches to RTL and uses a locally served Arabic-script font; longer English content keeps its own language semantics. This is not a claim that a complete, approved Urdu site has been delivered.
 
-The endpoint checks origin, schema, JSON format, a 24 KB request limit and a honeypot. Its bounded process-local limiter allows five requests per 15 minutes. `TRUST_PROXY=true` is appropriate only when the hosting proxy sanitizes `x-forwarded-for`; otherwise a conservative shared local bucket is used. Configure a shared edge limiter for multiple server instances. The current delivery tests use mocks and never send external messages. Real delivery must be verified after the destination is supplied.
+The client copy gives Pakistan's median age as 20.6. Under the user's authorization to resolve factual gaps, the displayed figure was updated to 20.8 from Worldometer's 2026 page, checked on 22 October 2026. The original wording remains in the source extraction. The national mental-health-policy announcement was corroborated against the government's Press Information Department.
 
-Set `SITE_URL` to the confirmed HTTPS production origin, then rebuild. This enables canonical URLs, public indexing and sitemap entries. Without it, indexing is disabled and the sitemap is empty; localhost is used only to resolve local social-preview metadata. No public deployment has been made.
+All pages currently use `noindex,nofollow`; robots disallows crawling and the sitemap is empty. Setting `SITE_URL` enables correct canonical URLs but does **not** remove this publication hold. Resolve the client details and approvals before changing the indexing rules. See `design/CLIENT-COPY-UPDATE.md` for the design direction, gaps and verification notes.
 
-## Content maintenance
+## Forms and delivery
 
-Edit the typed source files in `src/data/`:
+Waitlist/newsletter, course interest, student track, partner enquiry, research interest and contact forms have client and server validation, explicit consent and bounded fields. Without delivery credentials they prepare an **unsent draft**, with a native text-file download link. The application stores no form data. Editing a field clears its old error and invalidates a prepared draft.
 
-| File | Content |
-| --- | --- |
-| `site.ts` | Mission, introduction, navigation and section copy |
-| `resources.ts` | Research domains, official links and guidance topics |
-| `projects.ts` | Project titles, statuses, DOI identifiers and approved summaries |
-| `team.ts` | Profiles and optional image paths |
-| `datasets.ts` | Approved dataset entries; currently intentionally empty |
-| `types.ts` | Content schema |
+Copy `.env.example` to `.env.local` and supply `CONTACT_WEBHOOK_URL` (HTTPS) and `CONTACT_WEBHOOK_TOKEN` only after a real destination is agreed. `/api/forms` POSTs `{ source: "NeuroSphere", form, values }` to that endpoint with a server-only Bearer token. The receiver must return 2xx only after accepting delivery. The supplied confirmation message is shown only after a confirmed 2xx; timeout and provider failure retain the form. Tests use mocks and never send external enquiries.
 
-Add real dataset entries with source, access link and requirements to populate the listing automatically. Guidance articles/FAQ answers, dataset content, portraits, the second biography, final domain and enquiry recipient remain client-provided items. Do not replace these with invented scientific information.
+Requests require same-origin JSON, valid field/options/consent, an empty honeypot and a maximum 24 KB body. A bounded process-local limiter permits five requests per 15 minutes. Set `TRUST_PROXY=true` only behind a proxy that sanitizes `x-forwarded-for`; apply a shared edge limiter for multiple production instances. Real delivery and retention/unsubscribe handling must be verified with the chosen provider before launch. The legacy `/api/enquiry` endpoint is retained for compatibility with the previous implementation.
 
-## Design
+## UI and motion
 
-`design/DIRECTION.md` records research, IA, three explored visual directions, the selected Field Notes system and intentional refinements. Accepted image-generated page concepts are in `design/concepts/`. The looping fiber artwork is decorative, not anatomical imagery or a research result. Cormorant Garamond and Manrope are served locally by Next.js; Lucide provides the vector icons. shadcn/Radix primitives receive custom typography, geometry, color and interaction styling.
+The Field Notes identity uses Cormorant Garamond, Manrope, a forest/olive palette, fine rules and the existing abstract fiber-loop illustration. Refreshed visual concepts are in `design/concepts/client-update/`. shadcn/Radix supplies accessible primitives with custom styling.
 
-## Verification
+Motion uses progressive enhancement: short hero entrances, scroll-triggered reveals, capped child staggering, reading progress and responsive hover/focus feedback. Content is never hidden while waiting for JavaScript or scrolling. Reduced-motion preferences remove animation and smooth scrolling. Native anchor links and disclosure controls preserve familiar keyboard behavior. No animation framework, analytics, accounts or simulated clinical service was added.
+
+## Checks
 
 ```sh
 npm test
@@ -70,6 +59,4 @@ npm run typecheck
 npm run build
 ```
 
-Content tests compare all project titles/statuses/DOIs and key prose against the source brief. Other tests cover search, draft labeling, validation, request bounds, rate limiting and delivery success/failure responses. Browser checks cover the six pages at 375, 430, 768, 1024, 1280 and 1440 pixels, mobile menu focus restoration, search/reset, domain URLs, project filtering and enquiry draft preparation. Screenshots and the visual fidelity ledger are stored outside the repository in the Codex task's visualization folder.
-
-The build has no analytics, account system, simulation engine, clinical decision tool or unnecessary CMS. Automated checks and browser inspection are not a claim of complete WCAG certification or real-device testing.
+Tests verify exact source metadata, catalogue counts/content, locale paths, consent/options/length validation, explicit draft labels, request limits and mocked delivery outcomes. Browser checks exercise desktop/mobile page families, catalogue search/filter/reset, course context, menu focus restoration, RTL switching, form errors/drafts and reduced-motion behavior. Evidence is stored outside the repository in the task's visualization directory. Browser checks are not complete WCAG certification or physical-device testing.

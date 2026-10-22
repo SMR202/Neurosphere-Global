@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-export const alt =
-  "NeuroSphere Global — Neuroscience research, practical resources, and open collaboration.";
+export const alt = "NeuroSphere — Brain health, learned and built together.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function OpenGraphImage() {
@@ -18,7 +17,7 @@ export default function OpenGraphImage() {
           padding: 65,
         }}
       >
-        <div style={{ fontSize: 28, display: "flex" }}>NeuroSphere Global</div>
+        <div style={{ fontSize: 28, display: "flex" }}>NeuroSphere</div>
         <div
           style={{
             fontSize: 68,
@@ -27,7 +26,7 @@ export default function OpenGraphImage() {
             maxWidth: 1040,
           }}
         >
-          Neuroscience research, practical resources, and open collaboration.
+          Brain health, learned and built together.
         </div>
         <div
           style={{
@@ -37,7 +36,7 @@ export default function OpenGraphImage() {
             fontSize: 23,
           }}
         >
-          Research & Resources · Datasets · Projects · Team
+          Learn · Brain Health · Programmes · Research · Partner With Us
         </div>
       </div>
     ),

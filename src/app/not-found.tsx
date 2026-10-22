@@ -1,13 +1,18 @@
-import { TextLink } from "@/components/editorial";
+import { Action, Intro } from "@/components/site/primitives";
 export default function NotFound() {
   return (
-    <div className="container not-found">
-      <h1>Page not found.</h1>
-      <p>
-        The page may have moved. Explore the research library or return to the
-        homepage.
-      </p>
-      <TextLink href="/">Return home</TextLink>
-    </div>
+    <>
+      <Intro
+        title="This page is not available."
+        description="It may be opening soon. Go to the home page or join the waitlist."
+      >
+        <div className="hero-actions">
+          <Action href="/">Go to the home page</Action>
+          <Action href="/join" secondary>
+            Join the waitlist
+          </Action>
+        </div>
+      </Intro>
+    </>
   );
 }

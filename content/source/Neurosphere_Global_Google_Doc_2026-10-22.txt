@@ -1,0 +1,145 @@
+﻿Neurosphere Global — Phase 1 Scope
+
+
+Objective
+NeuroSphere Global's objective is to advance neuroscience research and make it more accessible — bringing together a research team, ongoing projects, and practical resources under one platform, so that researchers, clinicians, and students working across EEG, neuroimaging, neurogenetics, and neuromodulation have a credible, central place to find guidance, data, and opportunities for collaboration.
+
+
+Phase 1 Pages / Features
+
+
+1. Home
+Mission Statement
+NeuroSphere Global brings together neuroscience research, practical resources, and open collaboration — for researchers, clinicians, and students working across EEG, neuroimaging, neurogenetics, and neuromodulation.
+Introduction
+NeuroSphere Global is a research group dedicated to advancing neuroscience through active research, practical guidance, and open collaboration, the team works across five core domains — neurophysiology/EEG, neuroimaging, neurogenetics, neuromodulation, and brain informatics/AI — to support researchers, clinicians, and students at every stage of their work.
+This website serves as a central home for that work: a place to explore the team's ongoing projects, access curated research resources and datasets, learn about the people behind the research, and reach out directly for guidance or collaboration.
+Explore the Site
+Research Guidance & Resources
+Curated references, tools, and methodology guidance across the team's core research areas.
+Datasets
+Neuroscience datasets from the team's own research and trusted external sources, with access details.
+Activities / Projects
+Current and past research projects, studies, and collaborations from the NeuroSphere Global team.
+Team
+Meet the people behind NeuroSphere Global — their roles, expertise, and background.
+Contact / Research Enquiry
+Reach out for research guidance, collaboration, or general enquiries.
+
+
+2. Research Guidance & Resources
+This section brings together research information, references, tools, and guidance curated by the NeuroSphere Global team — organized around the group's core research domains, so researchers, clinicians, and students can quickly find material relevant to their own work.
+Neurophysiology, EEG & EMG
+Recommended reading, analysis tools, and guidance notes for EEG/EMG acquisition, artifact handling, and signal interpretation.
+* Tools: EEGLAB, FieldTrip, MNE-Python, BrainVision Analyzer
+* Guidance: 10-20 electrode placement systems, common artifact types and rejection strategies, quantitative EEG basics, needle EMG vs. nerve conduction study fundamentals
+* Key journals: Clinical Neurophysiology, Journal of Neuroscience Methods
+Neuroimaging
+References and tool links for structural and functional MRI, fMRI, and DTI methodology and processing.
+* Tools: SPM, FSL, FreeSurfer, AFNI, MRtrix3
+* Guidance: structural vs. functional sequence selection, BOLD signal basics, DTI/tractography fundamentals, MRI safety screening considerations
+* Data standards: BIDS (Brain Imaging Data Structure) for organizing and sharing imaging data
+* Key journals: NeuroImage, Human Brain Mapping
+Neurogenetics
+Resources for variant interpretation, genetic counseling, and rare-disease knowledge bases relevant to neurogenetic conditions.
+* Databases: ClinVar, OMIM, gnomAD, Human Phenotype Ontology (HPO), DECIPHER
+* Guidance: variant classification frameworks (ACMG/AMP guidelines), referral pathways for genetic counseling, phenotype-genotype correlation basics
+* Key journals: Genetics in Medicine, European Journal of Human Genetics
+Neuromodulation (TMS/tDCS)
+Protocol references and safety guidelines for non-invasive brain stimulation research.
+* Guidance: published TMS safety consensus guidelines, tDCS dosing and safety considerations, coil positioning and motor threshold determination
+* Trial registries: ClinicalTrials.gov, ISRCTN registry
+* Key journals: Brain Stimulation, Clinical Neurophysiology
+Brain Informatics & AI
+Statistical and machine-learning resources relevant to neuroscience data analysis.
+* Tools: Python (scikit-learn, PyTorch, TensorFlow), R
+* Data repositories: OpenNeuro, PhysioNet
+* Guidance: applying machine learning to neurophysiological and imaging data responsibly, avoiding overfitting in small clinical datasets
+* Key journals: Journal of Neural Engineering, NeuroImage
+General Research Guidance
+Study design checklists, systematic review methodology (PRISMA), manuscript preparation notes, and a short FAQ for early-career researchers.
+* Frameworks: PRISMA guidelines for systematic reviews, Cochrane Handbook, ICMJE authorship and manuscript recommendations, COPE (Committee on Publication Ethics) guidance
+* Reference management: Zotero, EndNote, Mendeley
+* Funding resources: KACST, Vision 2030 health-innovation funds, NIH, Wellcome Trust
+* FAQ topics: choosing a study design, preparing a manuscript for submission, responding to reviewer comments, navigating authorship disputes
+3. Datasets
+A page for displaying useful neuroscience datasets with a short description and access/source link.
+
+
+4. Activities / Projects
+The research areas NeuroSphere Global is actively engaged in — spanning brain stimulation, genetics, imaging, and population health, all aimed at turning neuroscience discovery into real clinical impact.
+Neuromodulation & Personalized Brain Stimulation
+Exploring how brain stimulation techniques like TMS can be tailored to an individual's own brain activity, moving toward more precise, patient-specific therapy.
+Rare Genetic Epilepsies & Neurogenetics
+Studying the genetic and cellular basis of rare epilepsy syndromes, working toward faster, clearer diagnostic pathways for affected families.
+Neurodevelopmental Disorders
+Investigating new therapeutic approaches for conditions like Rett syndrome and related developmental disorders, with a focus on improving quality of life.
+Neuroimaging & Treatment Safety
+Using brain imaging to better understand how therapies interact with the developing and adult brain, supporting safer, more informed care.
+Exercise, Cognition & Healthy Aging
+Examining the relationship between physical activity, cognitive health, and the trajectory from healthy aging to neurodegenerative disease.
+AI in Neurological Diagnosis
+Applying artificial intelligence and machine learning to improve the speed and accuracy of diagnosis in complex neurological conditions.
+Patient Experience & Health Systems
+Understanding the real-world experience of patients navigating a neurological diagnosis, to help close gaps in clinical communication and support.
+Regional Research Capacity Building
+Strengthening research infrastructure and collaboration across the region's hospitals and institutions.
+Interested in collaborating in any of these areas? Reach out — we're always open to connecting with researchers, clinicians, and institutions working on related questions.
+Published Projects:
+1. Effects of anodal transcranial direct current stimulation on postural stability in subacute stroke: A randomized control trial (https://doi.org/10.14814/phy2.70067)
+2. Effects of transcranial direct current stimulation combined with motor relearning program on strength and balance in stroke patients (https://doi.org/10.7717/peerj.18925)
+3. Green Light and Transcranial Direct Current Stimulation in Migraine Patients: A Randomized Control Trial (https://doi.org/10.3390/brainsci15111209)
+4. Repetitive Transcranial Magnetic Stimulation for Pediatric Epilepsy: Current Evidence (10.57197/JDR-2025-0707)
+5. Diverse Physical Exercise Interventions and their Impact on Individuals with Multiple Sclerosis: A  Literature Review (10.57197/JDR-2026-0714)
+6. Effects of vagal nerve stimulation on pain frequency and intensity in chronic migraine; a randomized controlled trial ( https://doi.org/10.14814/phy2.70843)
+Completed/Submitted Projects
+1. Neurocognitive basis of lifestyle behaviors that impact cardiovascular risk (Submitted)
+2. Novel Neuroplasticity-Driven Rehabilitation Strategies for Stroke in Low-Resource Settings: Bridging Innovation and Implementation (Submitted)
+3. Effects Of Transcranial Direct Current Stimulation On Spasticity In Stroke Patients (Submitted)
+4. Effects of Transcranial Direct Current Stimulation on Post Stroke Depression: A randomized clinical trail (Drafting)
+5. Combined effects of focal muscle vibration and tDCS on motor recovery in stroke (Drafting)
+6. Combined Effects of Green Light and Transcranial Direct Current Stimulation on Migraine Intensity and Frequency in Migraine Patients. (Drafting)
+7. Assess tDCS for cardiovascular and locomotor outcomes in the community dwellers (Drafting)
+
+
+
+
+
+
+5. Team
+Profiles of the NeuroSphere Global team members, including their roles, expertise, and brief information.
+Dr. Shahid Bashir, PhD — Lead, NeuroSphere Global
+20+ years of international neuroscience research experience across Switzerland, the United States, Singapore, South Korea, and Saudi Arabia. PhD in Neurophysiology from the University of Fribourg, with postdoctoral training at Harvard Medical School. Research Lead at King Fahad Specialist Hospital – Dammam, with an academic affiliation at King Saud University. 210+ peer-reviewed publications; serves on two ILAE Diagnostic Methods Commission task forces and the ILAE EEG Platform Initiative for the Eastern Mediterranean Region. Research spans non-invasive brain stimulation (TMS, tDCS, tACS), cortical neurophysiology, rare genetic epilepsies, neurodevelopmental disorders, neurodegeneration, stroke rehabilitation, and global burden of disease (GBD) epidemiological modeling..
+Dr. Mirza Obaid Baig — [Role][a]
+[1–2 sentence expertise summary]
+[2–3 sentence background/bio][b]
+
+
+
+
+6. Contact / Research Enquiry
+A form where visitors can contact the team regarding research guidance, collaboration, general research enquiries, or other questions.
+
+
+
+
+
+
+
+
+Phase 1 Deliverable
+A responsive and professional website containing:
+• Home page
+• Research resources
+• Dataset listings
+• Activities/projects
+• Team profiles
+• Contact/research enquiry form
+
+
+Future Scope
+More advanced features such as virtual labs, simulations, user accounts, or interactive research tools can be considered later if required.
+
+
+[a]Please add role and team member...i will add too
+[b]please add name of the people..

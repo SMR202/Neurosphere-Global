@@ -1,0 +1,169 @@
+Research Guidance & Resources
+
+This section brings together research information, references, tools, and guidance curated by the NeuroSphere Global team — organized around the group's core research domains, so researchers, clinicians, and students can quickly find material relevant to their own work.
+
+Search resources
+RESEARCH DOMAINS
+All domains
+Neurophysiology & EEG
+Neuroimaging
+Neurogenetics
+Neuromodulation (TMS/tDCS)
+Brain Informatics & AI
+General Research Guidance
+
+Choose a domain or search by tool, framework, or topic.
+
+6 domains
+
+Neurophysiology & EEG
+
+Recommended reading, analysis tools, and guidance notes for EEG acquisition, artifact handling, and signal interpretation.
+
+Tools
+EEGLAB
+eeglab.org
+(opens in a new tab)
+FieldTrip
+fieldtriptoolbox.org
+(opens in a new tab)
+MNE-Python
+mne.tools
+(opens in a new tab)
+Guidance topics
+
+Guidance notes are forthcoming. Prepare an enquiry to discuss these topics with the team.
+
+10-20 electrode placement systems
+— prepare a research enquiry
+common artifact types and rejection strategies
+— prepare a research enquiry
+quantitative EEG basics
+— prepare a research enquiry
+Neuroimaging
+
+References and tool links for structural and functional MRI, fMRI, and DTI methodology and processing.
+
+Tools
+SPM
+fil.ion.ucl.ac.uk
+(opens in a new tab)
+FSL
+fsl.fmrib.ox.ac.uk
+(opens in a new tab)
+FreeSurfer
+freesurfer.net
+(opens in a new tab)
+AFNI
+afni.nimh.nih.gov
+(opens in a new tab)
+MRtrix3
+mrtrix.org
+(opens in a new tab)
+Guidance topics
+
+Guidance notes are forthcoming. Prepare an enquiry to discuss these topics with the team.
+
+structural vs. functional sequence selection
+— prepare a research enquiry
+BOLD signal basics
+— prepare a research enquiry
+DTI/tractography fundamentals
+— prepare a research enquiry
+Neurogenetics
+
+Resources for variant interpretation, genetic counseling, and rare-disease knowledge bases relevant to neurogenetic conditions.
+
+Databases
+ClinVar
+ncbi.nlm.nih.gov
+(opens in a new tab)
+OMIM
+omim.org
+(opens in a new tab)
+gnomAD
+gnomad.broadinstitute.org
+(opens in a new tab)
+Human Phenotype Ontology (HPO)
+hpo.jax.org
+(opens in a new tab)
+Guidance topics
+
+Guidance notes are forthcoming. Prepare an enquiry to discuss these topics with the team.
+
+variant classification frameworks
+— prepare a research enquiry
+referral pathways for genetic counseling
+— prepare a research enquiry
+Neuromodulation (TMS/tDCS)
+
+Protocol references and safety guidelines for non-invasive brain stimulation research.
+
+Trial registries
+ClinicalTrials.gov
+clinicaltrials.gov
+(opens in a new tab)
+Guidance topics
+
+Guidance notes are forthcoming. Prepare an enquiry to discuss these topics with the team.
+
+published TMS safety consensus guidelines
+— prepare a research enquiry
+tDCS dosing and safety considerations
+— prepare a research enquiry
+Brain Informatics & AI
+
+Statistical and machine-learning resources relevant to neuroscience data analysis.
+
+Tools
+Python
+python.org
+(opens in a new tab)
+Python / scikit-learn
+scikit-learn.org
+(opens in a new tab)
+Python / PyTorch
+pytorch.org
+(opens in a new tab)
+Python / TensorFlow
+tensorflow.org
+(opens in a new tab)
+R
+r-project.org
+(opens in a new tab)
+Guidance topics
+
+Guidance notes are forthcoming. Prepare an enquiry to discuss these topics with the team.
+
+applying machine learning to neurophysiological and imaging data responsibly
+— prepare a research enquiry
+General Research Guidance
+
+Study design checklists, systematic review methodology (PRISMA), manuscript preparation notes, and a short FAQ for early-career researchers.
+
+Frameworks
+PRISMA guidelines for systematic reviews
+prisma-statement.org
+(opens in a new tab)
+Cochrane Handbook
+cochrane.org
+(opens in a new tab)
+ICMJE authorship and manuscript recommendations
+icmje.org
+(opens in a new tab)
+Early-career researcher FAQ topics
+
+Detailed FAQ answers are forthcoming. You can prepare an enquiry about any topic below.
+
+choosing a study design
+— prepare a research enquiry
+preparing a manuscript for submission
+— prepare a research enquiry
+responding to reviewer comments
+— prepare a research enquiry
+Contact /
+Research Enquiry
+
+Reach out for research guidance, collaboration, or general enquiries.
+
+Research Enquiry

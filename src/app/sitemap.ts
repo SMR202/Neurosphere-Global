@@ -1,10 +1,5 @@
 import type { MetadataRoute } from "next";
-import { siteOrigin } from "@/lib/metadata";
+// Client placeholders and unreviewed health/Urdu content prevent publication.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const origin = siteOrigin();
-  return origin
-    ? ["", "/research", "/datasets", "/projects", "/team", "/contact"].map(
-        (path) => ({ url: `${origin}${path}` }),
-      )
-    : [];
+  return [];
 }
