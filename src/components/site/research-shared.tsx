@@ -27,7 +27,7 @@ const researchLinks = [
   {
     title: "Meet the team",
     description:
-      "The people and research experience behind NeuroSphere Global.",
+      "The people and research experience behind NeuroZehn.",
     href: "/people",
   },
 ];

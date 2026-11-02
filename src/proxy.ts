@@ -3,7 +3,7 @@ export function proxy(request: NextRequest) {
   const headers = new Headers(request.headers);
   const path = request.nextUrl.pathname;
   headers.set(
-    "x-neurosphere-locale",
+    "x-neurozehn-locale",
     path === "/ur" || path.startsWith("/ur/") ? "ur" : "en",
   );
   return NextResponse.next({ request: { headers } });

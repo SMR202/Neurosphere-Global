@@ -20,11 +20,11 @@ export function MotionDirector() {
           const delay = Math.min(Math.max(0, siblings.indexOf(node)) * 70, 210);
           const animation = node.animate(
             [
-              { opacity: 0.5, transform: "translateY(22px)" },
+              { opacity: 0.75, transform: "translateY(12px)" },
               { opacity: 1, transform: "translateY(0)" },
             ],
             {
-              duration: 760,
+              duration: 480,
               delay,
               easing: "cubic-bezier(.2,.7,.2,1)",
               fill: "backwards",
@@ -37,9 +37,13 @@ export function MotionDirector() {
       },
       { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
     );
-    document.querySelectorAll("[data-reveal]").forEach((node) => {
+    document
+      .querySelectorAll(
+        ".three-doors [data-reveal], .home-roadmap article[data-reveal]",
+      )
+      .forEach((node) => {
         if (!node.querySelector("[data-reveal], form")) observer.observe(node);
-    });
+      });
     const stop = () => {
       if (reduce.matches) {
         observer.disconnect();

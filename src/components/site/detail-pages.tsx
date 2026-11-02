@@ -50,19 +50,29 @@ export function CourseDetail({
             </div>
             <div>
               <dt>Duration</dt>
-              <dd>To be announced</dd>
+              <dd>
+                {course.format?.match(/\d+ hours over \d+ weeks/)?.[0] ||
+                  "6–12 hours over 3–6 weeks"}
+              </dd>
             </div>
             <div>
-              <dt>Fee</dt>
-              <dd>Announced before enrolment</dd>
+              <dt>First-intake fees</dt>
+              <dd>
+                Students PKR 2,000 · Professionals PKR 5,000 · Scholarship
+                places free
+              </dd>
             </div>
             <div>
               <dt>Start dates</dt>
-              <dd>To be announced</dd>
+              <dd>
+                {course.status === "Opening soon"
+                  ? "First intake: early 2027"
+                  : "To be announced"}
+              </dd>
             </div>
             <div>
-              <dt>Teachers</dt>
-              <dd>Faculty details forthcoming</dd>
+              <dt>Prepared by</dt>
+              <dd>Dr. Shahid Bashir, PhD</dd>
             </div>
           </dl>
           <Action href="#interest" locale={locale}>
@@ -124,7 +134,10 @@ export function CourseDetail({
               ? "Join the waitlist"
               : "Register interest"}
           </h2>
-          <p>{copy(661).replace("Thank you. ", "")}</p>
+          <p>
+            Hear when enrolment opens and the start date is confirmed.
+            Registering interest does not commit you to a place.
+          </p>
         </div>
         <InterestForm
           kind="course"
@@ -156,61 +169,33 @@ export function ProgrammeDetail({
       <Intro title={programme.title} description={programme.description}>
         <StatusLabel status={programme.status} locale={locale} />
       </Intro>
-      <Section className="detail-layout">
-        <nav className="page-index" aria-label="On this page">
-          {[
-            "Why it matters in Pakistan",
-            "Who it serves",
-            "What you can do now",
-            "What is planned",
-            "Partners",
-            "Contact",
-          ].map((title, i) => (
-            <a href={`#programme-${i}`} key={title}>
-              {title}
-            </a>
-          ))}
-        </nav>
-        <div className="prose">
-          {["Why it matters in Pakistan", "Who it serves"].map((title, i) => (
-            <section id={`programme-${i}`} key={title}>
-              <h2>{title}</h2>
-              <Pending>
-                Further programme details will be announced as planning
-                progresses.
-              </Pending>
-            </section>
-          ))}
-          <section id="programme-2">
-            <h2>What you can do now</h2>
-            <TextLink href="/join" locale={locale}>
+      <Section className="programme-detail-actions">
+        <div>
+          <h2>What you can do now</h2>
+          <p>
+            Register your interest or explore a partnership with the institute.
+          </p>
+          <div className="hero-actions">
+            <Action href="/join" locale={locale}>
               Register interest
-            </TextLink>
+            </Action>
             <TextLink href="/partner" locale={locale}>
               Partner With Us
             </TextLink>
-          </section>
-          <section id="programme-3">
-            <h2>What is planned</h2>
-            <p>{programme.description}</p>
-            <StatusLabel status={programme.status} locale={locale} />
-            <Pending>Further programme details are being confirmed.</Pending>
-          </section>
-          <section id="programme-4">
-            <h2>Partners</h2>
-            <Pending>
-              Partners will be named once confirmed and with their permission.
-            </Pending>
-          </section>
-          <section id="programme-5">
-            <h2>Contact</h2>
-            <TextLink
-              href={`/contact?topic=${encodeURIComponent("General")}`}
-              locale={locale}
-            >
-              Contact us
-            </TextLink>
-          </section>
+          </div>
+        </div>
+        <div>
+          <h2>Opening step by step</h2>
+          <p>
+            Further programme details and confirmed partners will be published
+            as planning progresses. Services start only when approved and ready.
+          </p>
+          <TextLink href="/about/roadmap" locale={locale}>
+            See the full roadmap
+          </TextLink>
+          <TextLink href="/contact" locale={locale}>
+            Contact us
+          </TextLink>
         </div>
       </Section>
     </>
@@ -245,7 +230,7 @@ export function HealthDetail({
       >
         <Pending>
           {topic.paragraphs.length
-            ? "Draft guide — physician review and local emergency contacts are awaiting confirmation."
+            ? "Prepared by Dr. Shahid Bashir, PhD, neuroscientist. Last updated October 2026."
             : "This guide is in planning."}
         </Pending>
       </Intro>
@@ -261,9 +246,11 @@ export function HealthDetail({
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            {topic.after.map((item) => (
-              <p key={item}>{editorialText(item)}</p>
-            ))}
+            {topic.after
+              .filter((item) => !item.startsWith("Prepared by "))
+              .map((item) => (
+                <p key={item}>{editorialText(item)}</p>
+              ))}
             <p className="education-note">
               This is education, not a diagnosis or a replacement for your
               doctor.
@@ -292,7 +279,6 @@ export function HealthDetail({
           Explore Brain Health
         </TextLink>
       </section>
-      <Emergency />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import paragraphs from "../content/source/copy-paragraphs.json";
+import paragraphs from "../content/source/neurozehn/aligned.json";
 import {
   copy,
   courses,
@@ -77,9 +77,9 @@ test("all approved routes have metadata, unique addresses and usable locale vari
   assert.equal(routeLocale("/urgent").locale, "en");
   assert.equal(urdu["Learn"], "سیکھیں");
 });
-test("missing scientific and operational details stay explicit and unapproved", () => {
-  assert.ok(copy(33).includes("[Emergency and crisis numbers for Pakistan]"));
-  assert.ok(copy(317).includes("[reviewer name and role]"));
-  assert.ok(courses[0].format?.includes("[fee]"));
-  assert.ok(copy(31).includes("[Registered name and number, once registered]"));
+test("client supplied fees, contact and prepared-by details replace missing fields", () => {
+  assert.ok(copy(33).includes("Rescue 1122"));
+  assert.ok(copy(317).includes("Prepared by Dr. Shahid Bashir"));
+  assert.ok(courses[0].format?.includes("PKR 2,000"));
+  assert.ok(copy(31).includes("Registration in progress"));
 });

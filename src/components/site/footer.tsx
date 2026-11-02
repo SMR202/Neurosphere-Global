@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { clinicalDisclaimer, copy, footerLinks } from "@/content/client";
+import { clinicalDisclaimer, copy } from "@/content/client";
 import { localHref, translate, type Locale } from "@/lib/locale";
 import { Brand, TextLink } from "./primitives";
 import { editorialText } from "@/lib/editorial";
@@ -9,44 +9,83 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="site-footer" lang="en">
       <div className="container footer-newsletter">
         <div>
-          <h2>Stay informed.</h2>
-          <p>{copy(29).replace("Newsletter: Stay informed. ", "")}</p>
+          <h2>Stay connected.</h2>
+          <p>{copy(81).replace("Stay informed. ", "")}</p>
         </div>
-        <form action={localHref("/join", locale)} method="get">
-          <label htmlFor="footer-email">Email address</label>
-          <div className="newsletter-input">
-            <input
-              id="footer-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              placeholder="you@example.com"
-            />
-            <button type="submit">
-              {translate("Subscribe", locale)}
-              <ArrowRight aria-hidden="true" />
-            </button>
-          </div>
-          <p>Choose your interests and confirm consent on the next page.</p>
-        </form>
+        <TextLink href="/join" locale={locale}>
+          Choose your updates
+        </TextLink>
       </div>
       <div className="container footer-main">
         <div>
           <Brand locale={locale} />
-          <p>{translate(copy(3), locale)}</p>
-          <TextLink href="/ethics-privacy" locale={locale}>
-            Ethics and privacy
-          </TextLink>
+          <p>Brain health, learned and built together.</p>
+          <a className="footer-email" href="mailto:NeuroZehn@outlook.com">
+            NeuroZehn@outlook.com
+          </a>
         </div>
         <nav aria-label="Footer" lang={locale}>
-          {footerLinks.map(([label, href]) => (
-            <Link href={localHref(href, locale)} key={href}>
-              {translate(label, locale)}
-            </Link>
+          {[
+            {
+              title: "Explore",
+              links: [
+                ["Learn", "/learn"],
+                ["Brain Health", "/brain-health"],
+                ["Programmes", "/programmes"],
+                ["Partner With Us", "/partner"],
+              ],
+            },
+            {
+              title: "Research",
+              links: [
+                ["Research overview", "/research"],
+                ["Research resources", "/research/resources"],
+                ["Projects & publications", "/projects"],
+                ["Datasets", "/datasets"],
+              ],
+            },
+            {
+              title: "Institute",
+              links: [
+                ["About", "/about"],
+                ["People", "/people"],
+                ["Insights", "/insights"],
+                ["Contact", "/contact"],
+              ],
+            },
+          ].map((group) => (
+            <div key={group.title}>
+              <h3 lang="en">{group.title}</h3>
+              {group.links.map(([label, href]) => (
+                <Link
+                  href={localHref(href, locale)}
+                  key={href}
+                  lang={translate(label, locale) === label ? "en" : locale}
+                >
+                  {translate(label, locale)}
+                </Link>
+              ))}
+            </div>
           ))}
         </nav>
       </div>
+      <nav className="container footer-policies" aria-label="Policies">
+        {[
+          ["Ethics and privacy", "/ethics-privacy"],
+          ["Privacy Policy", "/privacy-policy"],
+          ["Terms of Use", "/terms-of-use"],
+          ["Cookie notice", "/cookies"],
+          ["Accessibility", "/accessibility"],
+        ].map(([label, href]) => (
+          <Link
+            href={localHref(href, locale)}
+            key={href}
+            lang={translate(label, locale) === label ? "en" : locale}
+          >
+            {translate(label, locale)}
+          </Link>
+        ))}
+      </nav>
       <div className="container footer-bottom">
         <p>{editorialText(clinicalDisclaimer)}</p>
         <a className="back-top" href="#main">

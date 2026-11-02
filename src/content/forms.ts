@@ -16,6 +16,7 @@ export type FormField = {
   max?: number;
   hint?: string;
   autoComplete?: string;
+  additional?: boolean;
 };
 const name: FormField = {
   name: "name",
@@ -35,7 +36,10 @@ const email: FormField = {
 };
 const consent: FormField = {
   name: "consent",
-  label: copy(675).replace(" [Link: Privacy Policy]", ""),
+  label: copy(675).replace(
+    /\s*(?:\[Link: Privacy Policy\]|\(link to Privacy Policy\))/gi,
+    "",
+  ),
   type: "checkbox",
   required: true,
 };
@@ -58,11 +62,11 @@ export const formDefinitions: Record<
     confirmation: copy(658),
     button: "Join the waitlist",
     fields: [
-      { ...name, required: false },
       email,
       {
         name: "interests",
         label: "What would you like to hear about?",
+        hint: "Choose at least one.",
         type: "checkboxes",
         required: true,
         options: [
@@ -76,33 +80,37 @@ export const formDefinitions: Record<
         name: "role",
         label: "Role",
         type: "select",
-        required: true,
+        additional: true,
         options: ["Student", "Professional", "Family member", "Institution"],
       },
-      { name: "city", label: "City", type: "text", required: true, max: 120 },
+      { ...name, required: false, additional: true },
+      { name: "city", label: "City", type: "text", additional: true, max: 120 },
       consent,
     ],
   },
   course: {
     title: "Course interest",
-    confirmation: copy(661),
+    confirmation: copy(661).replace(
+      "the start date and fee as soon as they are set",
+      "when enrolment opens and the start date is confirmed",
+    ),
     button: "Register interest",
     fields: [
-      name,
       email,
-      { name: "role", label: "Role", type: "text", required: true, max: 120 },
+      { ...name, required: false, additional: true },
+      { name: "role", label: "Role", type: "text", additional: true, max: 120 },
       {
         name: "discipline",
         label: "Discipline",
         type: "text",
-        required: true,
+        additional: true,
         max: 160,
       },
       {
         name: "organisation",
         label: "University or workplace",
         type: "text",
-        required: true,
+        additional: true,
         max: 200,
       },
       {
@@ -116,7 +124,6 @@ export const formDefinitions: Record<
         name: "scholarship",
         label: "Scholarship needed",
         type: "select",
-        required: true,
         options: ["Yes", "No"],
       },
       consent,
@@ -268,3 +275,19 @@ export const formDefinitions: Record<
     ],
   },
 };
+
+export function getFormDefinition(form: FormKind, intent?: "brief") {
+  const definition = formDefinitions[form];
+  if (form !== "partner" || intent !== "brief") return definition;
+  return {
+    ...definition,
+    title: "Request the partner brief",
+    fields: definition.fields.map((field) =>
+      ["organisation", "partnerType", "timeline", "namingPermission"].includes(
+        field.name,
+      )
+        ? { ...field, required: false, additional: true }
+        : field,
+    ),
+  };
+}

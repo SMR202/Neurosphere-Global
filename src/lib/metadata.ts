@@ -20,7 +20,7 @@ export function pageMetadata(
     description,
     ...(origin ? { alternates: { canonical: `${origin}${path}` } } : {}),
     openGraph: {
-      title: `${title} | NeuroSphere Global`,
+      title: `${title} | NeuroZehn`,
       description,
       type: "website",
       ...(origin ? { url: `${origin}${path}` } : {}),

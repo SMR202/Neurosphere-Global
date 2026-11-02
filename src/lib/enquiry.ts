@@ -38,7 +38,7 @@ export const enquirySchema = z.object({
 export type Enquiry = z.infer<typeof enquirySchema>;
 export function enquiryDraft(values: Enquiry) {
   return [
-    "NeuroSphere Global — Research Enquiry",
+    "NeuroZehn — Research Enquiry",
     "DRAFT — NOT SENT",
     "",
     `Name: ${values.name}`,

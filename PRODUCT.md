@@ -1,0 +1,3 @@
+# NeuroZehn
+
+NeuroZehn Institute for Brain Health & Neuroscience serves students, professionals, researchers, families and institutional partners in Pakistan. The user delegates design decisions and requests a substantial rebrand inspired by SimonMed and SAHMRI, with original artwork, accessible interactive figures and fluent restrained motion. Next.js is required. Current source is the November NeuroZehn DOCX and supplied figures. Preserve previously approved research/projects/resources when not explicitly superseded. Never fabricate qualifications, affiliations, clinical services or delivery confirmations. Contact: NeuroZehn@outlook.com. No accounts, diagnostics or payments in Phase 1.

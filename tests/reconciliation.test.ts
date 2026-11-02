@@ -11,7 +11,6 @@ import { domains } from "../src/data/resources";
 import { projects } from "../src/data/projects";
 import { team } from "../src/data/team";
 import { publicPaths, getPageInfo, copy } from "../src/content/client";
-import { editorialText } from "../src/lib/editorial";
 
 test("the combined library retains all original resources and restores Google Doc additions", () => {
   const doc = readFileSync(
@@ -69,14 +68,12 @@ test("restored destinations have metadata and owned data is not invented", () =>
         new URL(d.source).protocol === "https:",
     ),
   );
-  assert.equal(team[1].role, undefined);
+  assert.equal(team[1].role, "Founder");
   assert.equal(team[1].bio, undefined);
 });
 
-test("unanswered fields get honest presentation without altering approved source or implying review", () => {
-  assert.ok(copy(96).includes("[hours]"));
-  assert.ok(!editorialText(copy(96)).includes("["));
-  assert.match(editorialText(copy(317)), /will be published when confirmed/);
-  assert.ok(!editorialText(copy(31)).includes("Registered name"));
-  assert.ok(!editorialText(copy(33)).includes("["));
+test("current source resolves previous placeholders without fake delivery", () => {
+  assert.ok(copy(96).includes("6 to 12"));
+  assert.ok(copy(317).includes("Prepared by"));
+  assert.ok(copy(31).includes("Registration in progress"));
 });

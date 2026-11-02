@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { formDefinitions, type FormKind } from "@/content/forms";
+import { getFormDefinition, type FormKind } from "@/content/forms";
 export const submissionSchema = z
   .object({
     form: z.enum([
@@ -15,9 +15,16 @@ export const submissionSchema = z
       z.union([z.string().max(5000), z.array(z.string().max(250)).max(12)]),
     ),
     website: z.string().max(0).default(""),
+    intent: z.literal("brief").optional(),
   })
   .superRefine((payload, ctx) => {
-    const definition = formDefinitions[payload.form];
+    if (payload.intent && payload.form !== "partner")
+      ctx.addIssue({
+        code: "custom",
+        path: ["intent"],
+        message: "This request is not available for this form.",
+      });
+    const definition = getFormDefinition(payload.form, payload.intent);
     for (const field of definition.fields) {
       const raw = payload.values[field.name];
       const value = typeof raw === "string" ? raw.trim() : raw;
@@ -73,14 +80,34 @@ export function submissionErrors(error: z.ZodError) {
   }
   return errors;
 }
-export function draftText(form: FormKind, values: Submission["values"]) {
+export function draftText(
+  form: FormKind,
+  values: Submission["values"],
+  intent?: "brief",
+) {
   return [
-    "NeuroSphere — " + formDefinitions[form].title,
+    "NeuroZehn — " + getFormDefinition(form, intent).title,
     "DRAFT — NOT SENT",
     "",
-    ...formDefinitions[form].fields.map(
-      (field) =>
-        `${field.label}\n${Array.isArray(values[field.name]) ? (values[field.name] as string[]).join(", ") : values[field.name] || "Not provided"}\n`,
-    ),
+    ...getFormDefinition(form, intent)
+      .fields.filter(
+        (field) =>
+          field.required ||
+          (Array.isArray(values[field.name])
+            ? (values[field.name] as string[]).length > 0
+            : Boolean(values[field.name])),
+      )
+      .map(
+        (field) =>
+          `${field.label}\n${Array.isArray(values[field.name]) ? (values[field.name] as string[]).join(", ") : values[field.name] || "Not provided"}\n`,
+      ),
   ].join("\n");
+}
+
+export function emailHref(form: FormKind, text: string, intent?: "brief") {
+  const body = text.replace(
+    "DRAFT — NOT SENT",
+    "Enquiry prepared on the NeuroZehn website",
+  );
+  return `mailto:NeuroZehn@outlook.com?subject=${encodeURIComponent("NeuroZehn — " + getFormDefinition(form, intent).title)}&body=${encodeURIComponent(body)}`;
 }

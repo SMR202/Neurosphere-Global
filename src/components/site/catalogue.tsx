@@ -72,6 +72,14 @@ export function Catalogue({
             description: c.audience,
             status: c.status,
             href: `/learn/${c.slug}`,
+            metadata: c.format
+              ? [
+                  c.format.match(/\d+ hours over \d+ weeks/)?.[0] ||
+                    "Duration to be announced",
+                  "Online · Urdu & English",
+                  "Students PKR 2,000 · Professionals PKR 5,000",
+                ]
+              : ["Format and dates to be announced"],
           }))}
           locale={locale}
         />

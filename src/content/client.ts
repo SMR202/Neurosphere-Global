@@ -1,4 +1,4 @@
-import paragraphs from "../../content/source/copy-paragraphs.json";
+import paragraphs from "../../content/source/neurozehn/aligned.json";
 import { restoredPages } from "./reconciled";
 
 /** Verbatim text from the supplied DOCX. One-based references match the extraction. */
@@ -135,7 +135,13 @@ export const partnerTypes = Array.from({ length: 7 }, (_, i) => ({
 }));
 export const roadmap = Array.from({ length: 4 }, (_, i) => ({
   stage: copy(526 + i * 3),
-  description: copy(527 + i * 3),
+  description:
+    i === 0
+      ? copy(527).replace(
+          "first micro-credentials",
+          "preparing the first micro-credentials",
+        )
+      : copy(527 + i * 3),
   status: copy(528 + i * 3),
 }));
 export const healthTopics = [
@@ -201,7 +207,7 @@ export function getPageInfo(path: string) {
   const course = courses.find((c) => path === `/learn/${c.slug}`);
   if (course)
     return {
-      title: `${course.title} | Micro-credential | NeuroSphere`,
+      title: `${course.title} | Micro-credential | NeuroZehn`,
       description: course.description.includes(". ")
         ? course.description.slice(0, course.description.indexOf(". ") + 1)
         : course.description,
@@ -209,41 +215,41 @@ export function getPageInfo(path: string) {
   const programme = programmes.find((p) => path === `/programmes/${p.slug}`);
   if (programme)
     return {
-      title: `${programme.title} | NeuroSphere`,
+      title: `${programme.title} | NeuroZehn`,
       description: programme.description,
     };
   const health = healthTopics.find((p) => path === `/brain-health/${p.slug}`);
   if (health)
     return {
-      title: `${health.title} | Brain Health | NeuroSphere`,
+      title: `${health.title} | Brain Health | NeuroZehn`,
       description: health.description,
     };
   if (path in legalPages)
     return {
-      title: `${legalPages[path as keyof typeof legalPages]} | NeuroSphere`,
+      title: `${legalPages[path as keyof typeof legalPages]} | NeuroZehn`,
       description: "Policy text is awaiting approval.",
     };
   const article = /^\/insights\/([1-6])$/.exec(path);
   if (article)
     return {
-      title: `${insights[Number(article[1]) - 1]} | NeuroSphere`,
+      title: `${insights[Number(article[1]) - 1]} | NeuroZehn`,
       description: "Article content is being prepared.",
     };
   const extra: Record<string, { title: string; description: string }> = {
     "/about/roadmap": {
-      title: "Our roadmap | NeuroSphere",
+      title: "Our roadmap | NeuroZehn",
       description: copy(508),
     },
     "/join": {
-      title: "Join the waitlist | NeuroSphere",
+      title: "Join the waitlist | NeuroZehn",
       description: copy(81),
     },
     "/learn/student-tracks": {
-      title: "Student tracks | NeuroSphere",
+      title: "Student tracks | NeuroZehn",
       description: copy(137),
     },
     "/research/participate": {
-      title: "Research participation | NeuroSphere",
+      title: "Research participation | NeuroZehn",
       description: copy(427),
     },
   };

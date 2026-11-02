@@ -51,7 +51,7 @@ export function SiteHeader() {
               </Button>
             </DialogTrigger>
             <DialogContent className="mobile-menu">
-              <DialogTitle>Explore NeuroSphere</DialogTitle>
+              <DialogTitle>Explore NeuroZehn</DialogTitle>
               <DialogDescription>
                 Research, resources, and open collaboration.
               </DialogDescription>

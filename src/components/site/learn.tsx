@@ -1,6 +1,6 @@
-import Image from "next/image";
+import { CredentialFigure } from "./learning-figure";
 import { Plus } from "lucide-react";
-import { copy, lines, courses, studentTracks } from "@/content/client";
+import { copy, courses, studentTracks } from "@/content/client";
 import type { Locale } from "@/lib/locale";
 import { Action, Section, TextLink } from "./primitives";
 import { Catalogue } from "./catalogue";
@@ -39,10 +39,7 @@ export function Learn({ locale }: { locale: Locale }) {
     <>
       <section className="container learning-hero">
         <div className="hero-copy">
-          <h1>
-            Learn brain <br />
-            health in practice.
-          </h1>
+          <h1>Learn brain health in practice.</h1>
           <p>{copy(92)}</p>
           <div className="hero-actions">
             <Action href="#catalogue" locale={locale}>
@@ -53,36 +50,38 @@ export function Learn({ locale }: { locale: Locale }) {
             </TextLink>
           </div>
         </div>
-        <div className="hero-art">
-          <Image
-            src="/images/fiber-sphere.png"
-            alt=""
-            fill
-            sizes="(max-width: 700px) 1px, 43vw"
-            preload
-          />
+        <div className="learning-summary">
+          <p>First intake</p>
+          <strong>Early 2027</strong>
+          <dl>
+            <div>
+              <dt>Students</dt>
+              <dd>PKR 2,000</dd>
+            </div>
+            <div>
+              <dt>Professionals</dt>
+              <dd>PKR 5,000</dd>
+            </div>
+            <div>
+              <dt>Scholarship places</dt>
+              <dd>Free</dd>
+            </div>
+          </dl>
+          <span>
+            Short modules. Practical learning. Certificate of completion.
+          </span>
         </div>
       </section>
-      <Section title="How micro-credentials work" className="credential-how">
-        <div className="principles-grid">
-          {lines(96, 100).map((item, i) => {
-            const split = item.indexOf(". ");
-            return (
-              <article key={item} data-reveal>
-                <span className="index-number" aria-hidden="true">
-                  0{i + 1}
-                </span>
-                <h3>{item.slice(0, split)}</h3>
-                <p>{editorialText(item.slice(split + 2))}</p>
-              </article>
-            );
-          })}
-        </div>
-      </Section>
       <Catalogue courses={courses} locale={locale} />
+      <Section title="How micro-credentials work" className="credential-how">
+        <CredentialFigure />
+      </Section>
       <Section title={copy(136)} id="student-tracks">
         <p className="section-lead">{copy(137)}</p>
-        <StudentTable />
+        <details className="track-disciplines">
+          <summary>Explore the disciplines and examples</summary>
+          <StudentTable />
+        </details>
         <TextLink href="/learn/student-tracks" locale={locale}>
           Apply for a student track
         </TextLink>

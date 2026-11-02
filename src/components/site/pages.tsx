@@ -1,3 +1,4 @@
+import { ProgrammeFigure } from "./institute-figures";
 import { notFound } from "next/navigation";
 import {
   copy,
@@ -51,21 +52,41 @@ function BrainHealth({ locale }: { locale: Locale }) {
     <>
       <Intro title={copy(275)} description={copy(276)}>
         <Pending>
-          Health guides are drafts. Physician reviewers and local emergency
-          contacts have not yet been confirmed.
+          Prepared by Dr. Shahid Bashir, PhD, neuroscientist. Last updated
+          October 2026.
         </Pending>
       </Intro>
       <Emergency />
       <Section title="Brain-health guides">
         <EditorialCards
           locale={locale}
-          items={healthTopics.map((topic) => ({
-            title: topic.title,
-            description: topic.description,
-            href: `/brain-health/${topic.slug}`,
-            status: topic.status,
-          }))}
+          items={healthTopics
+            .filter((topic) => topic.paragraphs.length)
+            .map((topic) => ({
+              title: topic.title,
+              description: topic.description,
+              href: `/brain-health/${topic.slug}`,
+              status: topic.paragraphs.length ? undefined : topic.status,
+              note: topic.paragraphs.length
+                ? "Read the guide"
+                : "Guide in planning",
+            }))}
         />
+      </Section>
+      <Section title="More guides in preparation" className="planned-guides">
+        <ul>
+          {healthTopics
+            .filter((topic) => !topic.paragraphs.length)
+            .map((topic) => (
+              <li key={topic.slug}>
+                <h3>{topic.title}</h3>
+                <p>{topic.description}</p>
+              </li>
+            ))}
+        </ul>
+        <TextLink href="/join?interests=Brain-health%20guides" locale={locale}>
+          Choose your updates
+        </TextLink>
       </Section>
       <section className="partner-band">
         <div className="container">
@@ -85,23 +106,15 @@ function BrainHealth({ locale }: { locale: Locale }) {
         <StatusLabel status="In planning" locale={locale} />
         <p className="section-lead">{copy(333)}</p>
       </Section>
-      <Emergency />
     </>
   );
 }
 function Programmes({ locale }: { locale: Locale }) {
   return (
     <>
-      <Intro title={copy(343)} description={copy(344)} />
+      <Intro compact title={copy(343)} description={copy(344)} />
       <Section>
-        <h2 className="sr-only">Explore the programmes</h2>
-        <EditorialCards
-          locale={locale}
-          items={programmes.map((programme) => ({
-            ...programme,
-            href: `/programmes/${programme.slug}`,
-          }))}
-        />
+        <ProgrammeFigure locale={locale} programmes={programmes} />
       </Section>
     </>
   );
@@ -229,6 +242,7 @@ function Partner({
         <InterestForm
           key={query.request || "partner"}
           kind="partner"
+          intent={query.request === "brief" ? "brief" : undefined}
           locale={locale}
           deliveryEnabled={deliveryEnabled}
           initial={
@@ -244,7 +258,7 @@ function Partner({
 function About({ locale }: { locale: Locale }) {
   return (
     <>
-      <Intro title="About NeuroSphere" description={copy(510)} />
+      <Intro title="About NeuroZehn" description={copy(510)} />
       <Section className="mission-section">
         <div>
           <h2>Vision</h2>
@@ -256,6 +270,12 @@ function About({ locale }: { locale: Locale }) {
         </div>
       </Section>
       <ResearchBackground locale={locale} />
+      <Section title="About the name">
+        <p className="section-lead">
+          Zehn (ذہن) means mind in Urdu. NeuroZehn joins neuroscience and the
+          mind: science that serves how people think, learn, feel and recover.
+        </p>
+      </Section>
       <Section title="Our values">
         <ol className="principle-list">
           {lines(516, 521).map((item, i) => (
@@ -270,7 +290,7 @@ function About({ locale }: { locale: Locale }) {
         <div className="container">
           <h2>Growing step by step.</h2>
           <div>
-            <p>{copy(544)}</p>
+            <p>Each service starts only when it is approved and ready.</p>
             <TextLink href="/about/roadmap" locale={locale}>
               See the full roadmap
             </TextLink>
@@ -294,17 +314,22 @@ function Insights({ locale }: { locale: Locale }) {
   return (
     <>
       <Intro title="Insights" description={copy(562)} />
-      <Section title="First articles">
-        <EditorialCards
-          locale={locale}
-          columns={2}
-          items={insights.map((title, i) => ({
-            title,
-            description: "Article content is being prepared.",
-            href: `/insights/${i + 1}`,
-            status: "In planning",
-          }))}
-        />
+      <Section title="Coming next" className="planned-articles">
+        <p className="section-lead">
+          These articles are being prepared. Choose brain-health updates to hear
+          when they are published.
+        </p>
+        <ul>
+          {insights.map((title) => (
+            <li key={title}>
+              <h3>{title}</h3>
+              <span>In preparation</span>
+            </li>
+          ))}
+        </ul>
+        <TextLink href="/join?interests=Brain-health%20guides" locale={locale}>
+          Choose your updates
+        </TextLink>
       </Section>
     </>
   );
@@ -343,25 +368,11 @@ function Contact({
       <Intro title={copy(595)} description={copy(596)} />
       <div className="container contact-layout">
         <aside className="contact-directory">
-          <h2>Contact NeuroSphere</h2>
-          <dl>
-            {[
-              "General",
-              "Learning and enrolment",
-              "Partnerships",
-              "Research participation",
-              "Media",
-            ].map((topic) => (
-              <div key={topic}>
-                <dt>{topic}</dt>
-                <dd>Choose this topic in the enquiry form.</dd>
-              </div>
-            ))}
-          </dl>
-          <p>
-            NeuroSphere is not a clinic. For medical emergencies, contact local
-            emergency services.
-          </p>
+          <h2>One team. A direct conversation.</h2>
+          <a className="contact-email" href="mailto:NeuroZehn@outlook.com">
+            NeuroZehn@outlook.com
+          </a>
+          <p>We reply within two working days.</p>
         </aside>
         <InterestForm
           kind="contact"
@@ -380,6 +391,10 @@ function Contact({
                 : ""),
           }}
         />
+        <p className="contact-boundary">
+          NeuroZehn is not a clinic. For medical emergencies, contact local
+          emergency services.
+        </p>
       </div>
     </>
   );
@@ -475,7 +490,11 @@ export function PageContent({
     case "/join":
       return (
         <>
-          <Intro title="Stay informed." description={copy(81)} />
+          <Intro
+            title="Stay informed."
+            description={copy(81).replace("Stay informed. ", "")}
+            compact
+          />
           <Section className="form-section">
             <div>
               <h2>Join the waitlist</h2>
@@ -564,7 +583,7 @@ export function PageContent({
       <>
         <Intro
           title={legalPages[path as keyof typeof legalPages]}
-          description="This page is awaiting approved text."
+          description="For questions about this information, please contact the institute."
         />
         <Section>
           <Pending>
@@ -572,9 +591,12 @@ export function PageContent({
             prepared.
           </Pending>
           <p className="section-lead">
-            This placeholder is part of the local content preview. The final
-            policy must be approved before publication.
+            Our ethics and privacy page explains the institute’s current
+            commitments.
           </p>
+          <TextLink href="/ethics-privacy" locale={locale}>
+            Ethics and privacy
+          </TextLink>
           <TextLink href="/contact" locale={locale}>
             Contact us
           </TextLink>

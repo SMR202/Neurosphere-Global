@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-export const alt = "NeuroSphere — Brain health, learned and built together.";
+export const alt = "NeuroZehn — Brain health, learned and built together.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function OpenGraphImage() {
@@ -12,12 +12,12 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           width: "100%",
           height: "100%",
-          background: "#f6f6f2",
-          color: "#123d36",
+          background: "#fafbf9",
+          color: "#102c46",
           padding: 65,
         }}
       >
-        <div style={{ fontSize: 28, display: "flex" }}>NeuroSphere</div>
+        <div style={{ fontSize: 28, display: "flex" }}>NeuroZehn Institute for Brain Health &amp; Neuroscience</div>
         <div
           style={{
             fontSize: 68,
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
         <div
           style={{
             display: "flex",
-            borderTop: "1px solid #a0aa91",
+            borderTop: "1px solid #245edb",
             paddingTop: 24,
             fontSize: 23,
           }}

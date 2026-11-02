@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CircleAlert } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { localHref, translate, type Locale } from "@/lib/locale";
 import { emergency, type Status } from "@/content/client";
 import { editorialText } from "@/lib/editorial";
@@ -19,10 +18,11 @@ export function Action({
   locale?: Locale;
   secondary?: boolean;
 }) {
+  const text = translate(children, locale);
   return (
     <Button asChild variant={secondary ? "outline" : "default"}>
       <Link href={localHref(href, locale)}>
-        <span lang={locale}>{translate(children, locale)}</span>
+        <span lang={text === children ? "en" : locale}>{text}</span>
         <ArrowRight data-icon="inline-end" aria-hidden="true" />
       </Link>
     </Button>
@@ -37,9 +37,10 @@ export function TextLink({
   children: string;
   locale?: Locale;
 }) {
+  const text = translate(children, locale);
   return (
     <Link className="text-link" href={localHref(href, locale)}>
-      <span lang={locale}>{translate(children, locale)}</span>
+      <span lang={text === children ? "en" : locale}>{text}</span>
       <ArrowRight aria-hidden="true" />
     </Link>
   );
@@ -63,16 +64,26 @@ export function Intro({
   description,
   children,
   compact = false,
+  summary,
 }: {
   title: string;
   description?: string;
   children?: ReactNode;
   compact?: boolean;
+  summary?: string;
 }) {
   return (
     <section className={`container page-intro ${compact ? "compact" : ""}`}>
       <h1>{title}</h1>
-      {description ? <p className="page-lead">{description}</p> : null}
+      {description ? (
+        <p className="page-lead">{summary || description}</p>
+      ) : null}
+      {summary && description ? (
+        <details className="intro-details">
+          <summary>About this collection</summary>
+          <p>{description}</p>
+        </details>
+      ) : null}
       {children}
     </section>
   );
@@ -111,15 +122,61 @@ export function Pending({
 }
 export function Emergency() {
   return (
-    <div className="container emergency">
-      <Alert>
+    <section
+      className="container emergency"
+      aria-label="Emergency and support contacts"
+    >
+      <div className="emergency-heading">
         <CircleAlert aria-hidden="true" />
-        <AlertTitle>In an emergency</AlertTitle>
-        <AlertDescription>
-          <p>{editorialText(emergency)}</p>
-        </AlertDescription>
-      </Alert>
-    </div>
+        <h2>In an emergency</h2>
+      </div>
+      <p>{editorialText(emergency).split(" Emergency: ")[0]}</p>
+      <div className="emergency-numbers">
+        <a href="tel:1122">
+          <strong>
+            Rescue <b>1122</b>
+          </strong>
+          <span>Ambulance, where available</span>
+        </a>
+        <a href="tel:115">
+          <strong>
+            Edhi ambulance <b>115</b>
+          </strong>
+          <span>Ambulance service</span>
+        </a>
+        <a href="tel:15">
+          <strong>
+            Police <b>15</b>
+          </strong>
+          <span>Emergency assistance</span>
+        </a>
+      </div>
+      <details className="support-contacts">
+        <summary>Mental health support contacts</summary>
+        <dl>
+          <div>
+            <dt>Rozan</dt>
+            <dd>
+              <a href="tel:080022444">0800-22-444</a>
+              <span>Mon to Fri, 9:30 AM to 5 PM</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Taskeen</dt>
+            <dd>
+              <a href="tel:+923168275336">+92 316 827 5336</a>
+              <span>Mon to Sat, 11 AM to 11 PM</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Humraaz</dt>
+            <dd>
+              <a href="tel:1166">Through 1166</a>
+            </dd>
+          </div>
+        </dl>
+      </details>
+    </section>
   );
 }
 export function EditorialCards({
@@ -132,6 +189,8 @@ export function EditorialCards({
     description: string;
     href: string;
     status?: Status;
+    note?: string;
+    metadata?: string[];
   }[];
   locale?: Locale;
   columns?: number;
@@ -152,6 +211,8 @@ export function EditorialCards({
           <div className="card-top">
             {item.status ? (
               <StatusLabel status={item.status} locale={locale} />
+            ) : item.note ? (
+              <span className="card-note">{item.note}</span>
             ) : (
               <span className="index-number" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
@@ -161,6 +222,13 @@ export function EditorialCards({
           </div>
           <h3>{item.title}</h3>
           <p>{item.description}</p>
+          {item.metadata?.length ? (
+            <ul className="course-card-meta">
+              {item.metadata.map((value) => (
+                <li key={value}>{value}</li>
+              ))}
+            </ul>
+          ) : null}
         </Link>
       ))}
     </div>

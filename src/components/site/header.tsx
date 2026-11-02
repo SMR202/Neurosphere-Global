@@ -52,6 +52,7 @@ export function Header({ locale }: { locale: Locale }) {
             <Link
               key={href}
               href={localHref(href, locale)}
+              lang={translate(label, locale) === label ? "en" : locale}
               aria-current={
                 current === href ||
                 current.startsWith(href + "/") ||
@@ -77,33 +78,69 @@ export function Header({ locale }: { locale: Locale }) {
               </Button>
             </DialogTrigger>
             <DialogContent
-              className="mobile-menu"
+              className="mobile-menu top-0 right-0 left-auto translate-x-0 translate-y-0"
               dir={locale === "ur" ? "rtl" : "ltr"}
             >
-              <DialogTitle>Explore NeuroSphere</DialogTitle>
+              <DialogTitle>Explore NeuroZehn</DialogTitle>
               <DialogDescription>
-                Brain health, learned and built together.
+                Find your way to learning, research and the institute.
               </DialogDescription>
               <nav aria-label="Mobile navigation" lang={locale}>
                 {[
-                  ["Home", "/"],
-                  ...navigation,
-                  ["Research resources", "/research/resources"],
-                  ["Projects & publications", "/projects"],
-                  ["Datasets", "/datasets"],
-                  ["People", "/people"],
-                  ["Join the waitlist", "/join"],
-                ].map(([label, href]) => (
-                  <Link
-                    href={localHref(href, locale)}
-                    key={href}
-                    onClick={() => setOpen(false)}
-                    aria-current={current === href ? "page" : undefined}
-                  >
-                    {translate(label, locale)}
-                    <ArrowRight aria-hidden="true" />
-                  </Link>
+                  {
+                    title: "Explore",
+                    links: [
+                      ["Home", "/"],
+                      ["Learn", "/learn"],
+                      ["Brain Health", "/brain-health"],
+                      ["Programmes", "/programmes"],
+                      ["Partner With Us", "/partner"],
+                    ],
+                  },
+                  {
+                    title: "Research",
+                    links: [
+                      ["Research overview", "/research"],
+                      ["Research resources", "/research/resources"],
+                      ["Projects & publications", "/projects"],
+                      ["Datasets", "/datasets"],
+                    ],
+                  },
+                  {
+                    title: "Institute",
+                    links: [
+                      ["About", "/about"],
+                      ["People", "/people"],
+                      ["Contact", "/contact"],
+                    ],
+                  },
+                ].map((group) => (
+                  <div className="menu-group" key={group.title}>
+                    <h3 lang="en">{group.title}</h3>
+                    {group.links.map(([label, href]) => (
+                      <Link
+                        href={localHref(href, locale)}
+                        key={href}
+                        lang={
+                          translate(label, locale) === label ? "en" : locale
+                        }
+                        onClick={() => setOpen(false)}
+                        aria-current={current === href ? "page" : undefined}
+                      >
+                        {translate(label, locale)}
+                        <ArrowRight aria-hidden="true" />
+                      </Link>
+                    ))}
+                  </div>
                 ))}
+                <Link
+                  className="menu-cta"
+                  href={localHref("/join", locale)}
+                  onClick={() => setOpen(false)}
+                >
+                  {translate("Join the waitlist", locale)}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
               </nav>
             </DialogContent>
           </Dialog>

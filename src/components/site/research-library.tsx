@@ -69,6 +69,24 @@ export function ResearchLibrary({
       </div>
       <div className="research-library-layout">
         <aside className="research-domains">
+          <label
+            className="research-domain-select"
+            htmlFor="research-domain-select"
+          >
+            Research domain
+            <select
+              id="research-domain-select"
+              value={selected}
+              onChange={(event) => setSelected(event.target.value)}
+            >
+              <option value="all">All domains</option>
+              {libraryDomains.map((domain) => (
+                <option value={domain.slug} key={domain.slug}>
+                  {domain.title}
+                </option>
+              ))}
+            </select>
+          </label>
           <fieldset>
             <legend>Research domains</legend>
             {[{ slug: "all", title: "All domains" }, ...libraryDomains].map(

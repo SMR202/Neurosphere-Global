@@ -17,7 +17,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} NeuroSphere Global</p>
+          <p>© {new Date().getFullYear()} NeuroZehn</p>
           <a href="#main">Back to top</a>
         </div>
       </div>

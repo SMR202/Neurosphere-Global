@@ -103,7 +103,7 @@ export async function handleEnquiry(
         "Content-Type": "application/json",
         Authorization: `Bearer ${config.token}`,
       },
-      body: JSON.stringify({ source: "NeuroSphere Global", enquiry: data }),
+      body: JSON.stringify({ source: "NeuroZehn", enquiry: data }),
       signal: AbortSignal.timeout(10000),
       redirect: "error",
     });
@@ -118,7 +118,7 @@ export async function handleEnquiry(
     return reply(
       {
         message:
-          "Your enquiry has been submitted. Thank you for contacting NeuroSphere Global.",
+          "Your enquiry has been submitted. Thank you for contacting NeuroZehn.",
       },
       200,
     );

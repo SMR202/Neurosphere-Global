@@ -20,8 +20,10 @@ export function ResourcesPage({
   return (
     <>
       <Intro
+        compact
         title="Research Guidance & Resources"
         description={overview.resources}
+        summary="Curated tools, methods and reading across six research domains."
       />
       <ResearchLibrary locale={locale} initialDomain={initialDomain} />
       <ResearchEnquiry locale={locale} />
@@ -32,7 +34,12 @@ export function ResourcesPage({
 export function ProjectsPage({ locale }: { locale: Locale }) {
   return (
     <>
-      <Intro title="Projects & Publications" description={overview.projects}>
+      <Intro
+        compact
+        title="Projects & Publications"
+        description={overview.projects}
+        summary="Published papers, active studies and manuscripts from the research team."
+      >
         <p className="research-context">
           The research team’s existing work is listed here. New institute
           studies and services retain their separate planning status.
@@ -41,9 +48,9 @@ export function ProjectsPage({ locale }: { locale: Locale }) {
       <PublicationList />
       <Section title="Areas of research" className="research-areas">
         <p className="section-lead">
-          The research areas NeuroSphere Global is actively engaged in —
-          spanning brain stimulation, genetics, imaging, and population health,
-          all aimed at turning neuroscience discovery into real clinical impact.
+          The research areas NeuroZehn is actively engaged in — spanning brain
+          stimulation, genetics, imaging, and population health, all aimed at
+          turning neuroscience discovery into real clinical impact.
         </p>
         <div>
           {researchAreas.map((area, i) => (
@@ -65,7 +72,7 @@ export function ProjectsPage({ locale }: { locale: Locale }) {
 export function PeoplePage({ locale }: { locale: Locale }) {
   return (
     <>
-      <Intro title="The people building NeuroSphere" description={copy(553)} />
+      <Intro title="The people building NeuroZehn" description={copy(553)} />
       <Section className="team-profiles">
         <h2 className="sr-only">Research team</h2>
         {team.map((person) => (
@@ -78,26 +85,48 @@ export function PeoplePage({ locale }: { locale: Locale }) {
               <h2>{person.name}</h2>
               {person.bio ? (
                 <div className="team-biography">
-                  {person.bio
-                    .split(/ (?=PhD in|210\+|Research spans)/)
-                    .map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                  <p>
+                    {person.bio.split(/ (?=PhD in|210\+|Research spans)/)[0]}
+                  </p>
+                  <details>
+                    <summary>Read biography</summary>
+                    {person.bio
+                      .split(/ (?=PhD in|210\+|Research spans)/)
+                      .slice(1)
+                      .map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                  </details>
                 </div>
               ) : (
-                <p className="team-bio-pending">
-                  Further profile details will be added when confirmed.
-                </p>
+                <p className="team-bio-pending">Founder of NeuroZehn.</p>
               )}
             </div>
           </article>
         ))}
       </Section>
+      <Section title="Scientific team">
+        <div className="scientific-team">
+          <p>Dr. Mirza Obaid Baig</p>
+          <p>Dr. Kaleem Maqsood</p>
+          <p>Dr. Kaleem Imdad Hussain</p>
+          <p>Dr. Sumaiyah Obaid</p>
+          <p>Dr. Aneesa Zafar</p>
+          <p>Dr. Hamid Khan</p>
+          <p>Prof. Dieter Ruegg</p>
+          <p>Dr. Ali Hamza</p>
+        </div>
+        <p>
+          More collaborators and advisers will be listed here as they confirm.
+        </p>
+      </Section>
       <section className="partner-band">
         <div className="container">
           <h2>Clinicians. Educators. Scientists.</h2>
           <div>
-            <p>{copy(553)}</p>
+            <p>
+              Connect with the team about research, teaching or collaboration.
+            </p>
             <Action href="/contact?topic=Collaboration" locale={locale}>
               Contact us
             </Action>
@@ -112,12 +141,13 @@ export function DatasetsPage({ locale }: { locale: Locale }) {
   return (
     <>
       <Intro
+        compact
         title="Neuroscience datasets"
         description="Discover external neuroscience data sources for research and learning, with provider links and access information."
       >
         <p className="research-context">
           These resources are hosted by independent providers. No
-          NeuroSphere-owned dataset release is currently listed.
+          NeuroZehn-owned dataset release is currently listed.
         </p>
       </Intro>
       <Section title="Explore the data" className="dataset-collection">

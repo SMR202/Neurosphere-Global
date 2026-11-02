@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title =
     info?.title ??
     (article
-      ? `${insights[Number(article[1]) - 1]} | NeuroSphere`
-      : "Page not found | NeuroSphere");
+      ? `${insights[Number(article[1]) - 1]} | NeuroZehn`
+      : "Page not found | NeuroZehn");
   const description =
     info?.description ?? "This page is not available. It may be opening soon.";
   const origin = siteOrigin();

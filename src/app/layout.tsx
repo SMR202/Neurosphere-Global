@@ -8,12 +8,8 @@ import { copy } from "@/content/client";
 import { siteOrigin } from "@/lib/metadata";
 import type { Locale } from "@/lib/locale";
 import "./globals.css";
-const serif = localFont({
-  src: "./fonts/cormorant-garamond-latin-400.woff2",
-  weight: "400",
-  variable: "--font-editorial",
-  display: "swap",
-});
+import "./neurozehn.css";
+
 const sans = localFont({
   src: "./fonts/manrope-latin-variable.woff2",
   weight: "200 800",
@@ -31,7 +27,7 @@ export const metadata: Metadata = {
   description: copy(40),
   metadataBase: new URL(siteOrigin() ?? "http://localhost:3000"),
   openGraph: {
-    siteName: "NeuroSphere",
+    siteName: "NeuroZehn",
     type: "website",
     title: copy(38),
     description: copy(40),
@@ -44,12 +40,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const locale: Locale =
-    (await headers()).get("x-neurosphere-locale") === "ur" ? "ur" : "en";
+    (await headers()).get("x-neurozehn-locale") === "ur" ? "ur" : "en";
   return (
     <html
       lang={locale}
       dir={locale === "ur" ? "rtl" : "ltr"}
-      className={`${serif.variable} ${sans.variable} ${urdu.variable}`}
+      className={`${sans.variable} ${urdu.variable}`}
     >
       <body suppressHydrationWarning>
         <a className="skip-link" href="#main">
@@ -58,9 +54,13 @@ export default async function RootLayout({
         <Header locale={locale} />
         {locale === "ur" ? (
           <aside className="translation-preview" lang="en" dir="ltr">
-            Urdu interface preview · Draft navigation and button translations
-            await native-speaker review. Page text remains in English until
-            approved Urdu copy is supplied.
+            <span lang="ur" dir="rtl">
+              مینو اور اہم بٹن اردو میں ہیں۔ تفصیلی معلومات انگریزی میں ہیں۔
+            </span>
+            <span>
+              Menus and key buttons are in Urdu. Detailed information is in
+              English.
+            </span>
           </aside>
         ) : null}
         <main id="main" tabIndex={-1} lang="en">

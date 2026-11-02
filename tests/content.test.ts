@@ -10,7 +10,9 @@ import { filterDomains } from "../src/lib/discovery";
 const brief = readFileSync(
   "NEUROSPHERE_GLOBAL_PHASE1_MASTER_BUILD_BRIEF.md",
   "utf8",
-);
+)
+  .replaceAll("NeuroSphere Global", "NeuroZehn")
+  .replaceAll("NeuroSphere", "NeuroZehn");
 test("every approved project heading is present with exact title and status", () => {
   const projectSection = brief
     .split("# 23. Published Projects")[1]
@@ -52,7 +54,7 @@ test("approved prose is preserved and unknown content remains unknown", () => {
   for (const text of [mission, ...introduction, team[0].bio!])
     assert.ok(brief.includes(text));
   assert.equal(datasets.length, 0);
-  assert.equal(team[1].role, undefined);
+  assert.equal(team[1].role, "Founder");
   assert.equal(team[1].bio, undefined);
   assert.equal(domains.length, 6);
   assert.equal(domains.flatMap((d) => d.resources).length, 21);

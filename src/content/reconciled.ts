@@ -169,7 +169,7 @@ export const researchAreas = [
   },
 ];
 
-/** External sources, not NeuroSphere-owned releases. Descriptions checked against provider documentation. */
+/** External sources, not NeuroZehn-owned releases. Descriptions checked against provider documentation. */
 export const externalDataSources = [
   {
     name: "OpenNeuro",
@@ -207,17 +207,17 @@ export const externalDataSources = [
 
 export const restoredPages = {
   "/research/resources": {
-    title: "Research Guidance & Resources | NeuroSphere",
+    title: "Research Guidance & Resources | NeuroZehn",
     description:
       "Tools, methods, references and guidance across EEG, neuroimaging, neurogenetics, neuromodulation and brain informatics.",
   },
   "/projects": {
-    title: "Projects & Publications | NeuroSphere",
+    title: "Projects & Publications | NeuroZehn",
     description:
-      "Published work, ongoing studies, submitted projects and manuscripts from the NeuroSphere Global research team.",
+      "Published work, ongoing studies, submitted projects and manuscripts from the NeuroZehn research team.",
   },
   "/datasets": {
-    title: "Neuroscience Datasets | NeuroSphere",
+    title: "Neuroscience Datasets | NeuroZehn",
     description:
       "Explore external neuroscience data sources, with provider links, access information and guidance for responsible reuse.",
   },

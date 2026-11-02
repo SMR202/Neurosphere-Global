@@ -71,8 +71,9 @@ export async function handleSubmission(
         Authorization: `Bearer ${configuration.token}`,
       },
       body: JSON.stringify({
-        source: "NeuroSphere",
+        source: "NeuroZehn",
         form: parsed.data.form,
+        ...(parsed.data.intent ? { intent: parsed.data.intent } : {}),
         values: parsed.data.values,
       }),
       redirect: "error",

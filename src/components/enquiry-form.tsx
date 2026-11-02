@@ -73,7 +73,7 @@ export function EnquiryForm({
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = "neurosphere-research-enquiry.txt";
+    link.download = "neurozehn-research-enquiry.txt";
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -285,7 +285,7 @@ export function EnquiryForm({
             <AlertTitle>Enquiry submitted</AlertTitle>
             <AlertDescription>
               Your enquiry has been submitted. Thank you for contacting
-              NeuroSphere Global.
+              NeuroZehn.
             </AlertDescription>
           </Alert>
         ) : null}

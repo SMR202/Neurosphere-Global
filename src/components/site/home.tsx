@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { copy, lines, programmes, sourceLinks } from "@/content/client";
-import { localHref, translate, type Locale } from "@/lib/locale";
+import { copy, lines, roadmap, sourceLinks } from "@/content/client";
+import { translate, type Locale } from "@/lib/locale";
 import { Action, Section, TextLink } from "./primitives";
+import { JourneyFigure } from "./institute-figures";
 import { ResearchFoundation } from "./research-shared";
+import { ProgrammeNetwork } from "./programme-network";
 
 export function Home({ locale }: { locale: Locale }) {
   const doors = [
@@ -27,9 +27,6 @@ export function Home({ locale }: { locale: Locale }) {
       href: "/partner",
     },
   ];
-  const programmeNames = copy(71)
-    .replace("Twelve connected programmes: ", "")
-    .split(" · ");
   return (
     <>
       <section className="container home-hero" aria-labelledby="home-title">
@@ -58,7 +55,7 @@ export function Home({ locale }: { locale: Locale }) {
         </div>
         <div className="hero-art">
           <Image
-            src="/images/fiber-sphere.png"
+            src="/images/neurozehn-connection.webp"
             alt=""
             fill
             sizes="(max-width: 700px) 320px, (max-width: 1100px) 43vw, 650px"
@@ -72,7 +69,7 @@ export function Home({ locale }: { locale: Locale }) {
             { title: "Open now", body: "founding network and waitlist" },
             {
               title: "Opening soon",
-              body: "first micro-credentials; dates to be announced",
+              body: "first micro-credentials, early 2027",
             },
             {
               title: "In planning",
@@ -91,10 +88,7 @@ export function Home({ locale }: { locale: Locale }) {
           ))}
         </div>
       </div>
-      <section
-        className="container three-doors"
-        aria-label="Explore NeuroSphere"
-      >
+      <section className="container three-doors" aria-label="Explore NeuroZehn">
         {doors.map((door) => (
           <article key={door.href} data-reveal>
             <h2>{translate(door.title, locale)}</h2>
@@ -108,11 +102,16 @@ export function Home({ locale }: { locale: Locale }) {
       <Section className="building-section">
         <h2>{copy(60)}</h2>
         <div className="prose">
-          <p>{copy(61)}</p>
-          <p className="journey">{copy(62)}</p>
           <p>{copy(63)}</p>
+          <details className="institute-story">
+            <summary>Why we are building NeuroZehn</summary>
+            <p>{copy(61)}</p>
+          </details>
         </div>
       </Section>
+      <section className="container journey-section">
+        <JourneyFigure locale={locale} />
+      </section>
       <ResearchFoundation locale={locale} />
       <section className="facts-band" aria-labelledby="facts-title">
         <div className="container">
@@ -127,10 +126,10 @@ export function Home({ locale }: { locale: Locale }) {
                   <span className="fact-number" aria-hidden="true">
                     {["0.19", "0.4%", "260 million", "2026–2035"][i]}
                   </span>
-                  <p>{i === 2 ? claim.replace("20.6", "20.8") : claim}</p>
+                  <p>{claim}</p>
                   {i === 3 ? (
                     <div className="fact-source">
-                      <p>Source: {source}</p>
+                      <p>As reported by {source}</p>
                       <a
                         href={sourceLinks[i]}
                         target="_blank"
@@ -163,33 +162,11 @@ export function Home({ locale }: { locale: Locale }) {
         </div>
       </section>
       <Section title="Twelve connected programmes" className="programme-home">
-        <div className="programme-index">
-          {programmes.map((programme, i) => (
-            <Link
-              key={programme.slug}
-              href={localHref(`/programmes/${programme.slug}`, locale)}
-            >
-              <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-              <h3>{programmeNames[i]}</h3>
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          ))}
-        </div>
+        <ProgrammeNetwork locale={locale} />
         <TextLink href="/programmes" locale={locale}>
           See all programmes
         </TextLink>
       </Section>
-      <section className="partner-band">
-        <div className="container" data-reveal>
-          <h2>{copy(74)}</h2>
-          <div>
-            <p>{copy(75)}</p>
-            <Action href="/partner" locale={locale}>
-              Become a founding partner
-            </Action>
-          </div>
-        </div>
-      </section>
       <Section className="home-roadmap">
         <div className="section-heading">
           <h2>Opening in stages.</h2>
@@ -198,33 +175,28 @@ export function Home({ locale }: { locale: Locale }) {
           </TextLink>
         </div>
         <div className="roadmap-teaser">
-          {[
-            { title: "Now", body: "micro-credentials and public education." },
-            {
-              title: "Next",
-              body: "first research survey and student programmes.",
-            },
-            {
-              title: "Later",
-              body: "brain-health hub, care navigation and a wider research programme.",
-            },
-          ].map((item) => (
-            <article key={item.title} data-reveal>
-              <span className="timeline-dot" aria-hidden="true" />
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
+          {roadmap.map((stage) => {
+            const item = { title: stage.stage, body: stage.description };
+            return (
+              <article key={item.title} data-reveal>
+                <span className="timeline-dot" aria-hidden="true" />
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            );
+          })}
         </div>
       </Section>
-      <section className="container waitlist-band" data-reveal>
-        <div>
-          <h2>Stay informed.</h2>
-          <p>{copy(81)}</p>
+      <section className="partner-band">
+        <div className="container">
+          <h2>{copy(74)}</h2>
+          <div>
+            <p>{copy(75)}</p>
+            <Action href="/partner" locale={locale}>
+              Become a founding partner
+            </Action>
+          </div>
         </div>
-        <Action href="/join" locale={locale}>
-          Join the waitlist
-        </Action>
       </section>
     </>
   );
