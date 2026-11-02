@@ -1,4 +1,5 @@
 import { enquirySchema } from "./enquiry";
+import { hasSameOrigin } from "./request-origin";
 
 export function deliveryConfiguration() {
   const endpoint = process.env.CONTACT_WEBHOOK_URL;
@@ -35,8 +36,7 @@ export async function handleEnquiry(
   const headers = { "Cache-Control": "no-store" };
   const reply = (body: unknown, status: number) =>
     Response.json(body, { status, headers });
-  const origin = request.headers.get("origin");
-  if (!origin || origin !== new URL(request.url).origin)
+  if (!hasSameOrigin(request))
     return reply({ error: "Please send this enquiry from the website." }, 403);
   if (!request.headers.get("content-type")?.includes("application/json"))
     return reply({ error: "Unsupported request format." }, 415);

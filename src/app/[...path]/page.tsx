@@ -4,7 +4,7 @@ import { getPageInfo, insights } from "@/content/client";
 import { routeLocale, localHref } from "@/lib/locale";
 import { siteOrigin } from "@/lib/metadata";
 import { PageContent } from "@/components/site/pages";
-import { deliveryConfiguration } from "@/lib/enquiry-delivery";
+import { formDeliveryConfiguration } from "@/lib/form-delivery";
 type Props = {
   params: Promise<{ path?: string[] }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -68,7 +68,7 @@ export default async function WebsitePage({ params, searchParams }: Props) {
     <PageContent
       path={path}
       locale={locale}
-      deliveryEnabled={!!deliveryConfiguration()}
+      deliveryEnabled={!!formDeliveryConfiguration()}
       query={query}
     />
   );

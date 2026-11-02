@@ -40,11 +40,13 @@ All pages currently use `noindex,nofollow`; robots disallows crawling and the si
 
 ## Forms and delivery
 
+The current six forms support Web3Forms' free-plan browser delivery after server validation. See `design/FORM-DELIVERY-SETUP.md` for client verification, Vercel activation and real-inbox tests. Set `WEB3FORMS_ACCESS_KEY` only for a form linked to the client's verified receiving inbox. A missing/malformed key keeps the explicit email-app handoff. This provider connection is implemented; actual delivery requires the verified key and receipt confirmation. The existing authenticated webhook remains an alternative.
+
 Waitlist/newsletter, course interest, student track, partner enquiry, research interest and contact forms have client and server validation, explicit consent and bounded fields. Without delivery credentials they prepare an **unsent draft**, with a native text-file download link. The application stores no form data. Editing a field clears its old error and invalidates a prepared draft.
 
 Copy `.env.example` to `.env.local` and supply `CONTACT_WEBHOOK_URL` (HTTPS) and `CONTACT_WEBHOOK_TOKEN` only after a real destination is agreed. `/api/forms` POSTs `{ source: "NeuroZehn", form, values }` plus optional brief-request intent to that endpoint with a server-only Bearer token. The receiver must return 2xx only after accepting delivery. The supplied confirmation message is shown only after a confirmed 2xx; timeout and provider failure retain the form. Tests use mocks and never send external enquiries.
 
-Requests require same-origin JSON, valid field/options/consent, an empty honeypot and a maximum 24 KB body. A bounded process-local limiter permits five requests per 15 minutes. Set `TRUST_PROXY=true` only behind a proxy that sanitizes `x-forwarded-for`; apply a shared edge limiter for multiple production instances. Real delivery and retention/unsubscribe handling must be verified with the chosen provider before launch. The legacy `/api/enquiry` endpoint is retained for compatibility with the previous implementation.
+Requests require same-origin JSON, valid field/options/consent, an empty honeypot and a maximum 24 KB body. A bounded process-local limiter permits five requests per visitor per 15 minutes on Vercel, using its platform-controlled forwarded address. On other hosts, set `TRUST_PROXY=true` only behind a proxy that sanitizes `x-forwarded-for`; otherwise requests share the local limit. Apply a shared edge limiter for multiple production instances. Real delivery and retention/unsubscribe handling must be verified with the chosen provider before launch. The legacy `/api/enquiry` endpoint retains its webhook-only contract for compatibility with the previous implementation.
 
 ## UI and motion
 

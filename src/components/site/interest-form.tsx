@@ -34,6 +34,7 @@ import {
   type Submission,
 } from "@/lib/submission";
 import { localHref, translate, type Locale } from "@/lib/locale";
+import { FormSubmissionError, submitInterest } from "@/lib/form-client";
 
 export function InterestForm({
   kind,
@@ -50,6 +51,8 @@ export function InterestForm({
 }) {
   const ref = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+  const requestInFlight = useRef(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -62,6 +65,9 @@ export function InterestForm({
   useEffect(() => {
     if (draft || success) statusRef.current?.focus();
   }, [draft, success]);
+  useEffect(() => {
+    if (error && !Object.keys(errors).length) errorRef.current?.focus();
+  }, [error, errors]);
 
   function focusField(name: string) {
     const control = ref.current?.elements.namedItem(name);
@@ -118,41 +124,33 @@ export function InterestForm({
   }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (requestInFlight.current) return;
     if (!deliveryEnabled) {
       prepare(true);
       return;
     }
     const data = validate();
     if (!data) return;
+    requestInFlight.current = true;
     setBusy(true);
     setSuccess("");
     setDraft("");
     try {
-      const response = await fetch("/api/forms", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        signal: AbortSignal.timeout(15000),
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        setError(
-          result.error ||
-            "We could not send this. Please try again or continue by email.",
-        );
-        if (result.fields) {
-          setErrors(result.fields);
-          focusField(Object.keys(result.fields)[0]);
-        }
-      } else {
-        setSuccess(result.message);
-        ref.current?.reset();
-      }
-    } catch {
+      const confirmation = await submitInterest(data);
+      setSuccess(confirmation);
+      ref.current?.reset();
+    } catch (failure) {
       setError(
-        "We could not confirm delivery. Your details are still here. Please try again or continue by email.",
+        failure instanceof FormSubmissionError
+          ? failure.message
+          : "We could not confirm submission. Your details are still here. Please try again or continue by email.",
       );
+      if (failure instanceof FormSubmissionError && failure.fields) {
+        setErrors(failure.fields);
+        focusField(Object.keys(failure.fields)[0]);
+      }
     } finally {
+      requestInFlight.current = false;
       setBusy(false);
     }
   }
@@ -334,7 +332,7 @@ export function InterestForm({
       }}
     >
       {error ? (
-        <Alert variant="destructive">
+        <Alert ref={errorRef} tabIndex={-1} variant="destructive">
           <AlertTitle>
             {Object.keys(errors).length
               ? "Please check your form"
@@ -362,6 +360,12 @@ export function InterestForm({
         </details>
       ) : null}
       {renderField(definition.fields.find((f) => f.name === "consent")!)}
+      {deliveryEnabled ? (
+        <p className="form-instructions">
+          Your details are processed by our form delivery provider so the team
+          can respond. Please do not include personal medical information.
+        </p>
+      ) : null}
       {!deliveryEnabled ? (
         <p className="email-explanation">
           <Mail aria-hidden="true" />
@@ -412,7 +416,7 @@ export function InterestForm({
         {success ? (
           <Alert>
             <Check aria-hidden="true" />
-            <AlertTitle>Thank you</AlertTitle>
+            <AlertTitle>Request submitted</AlertTitle>
             <AlertDescription>{success}</AlertDescription>
           </Alert>
         ) : null}

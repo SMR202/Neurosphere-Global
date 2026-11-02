@@ -1395,6 +1395,10 @@ a {
 .consent-label {
   padding-block: 4px;
 }
+.interest-form > [role="alert"],
+.interest-form .form-result {
+  scroll-margin-top: 130px;
+}
 .form-result:empty {
   display: none;
 }

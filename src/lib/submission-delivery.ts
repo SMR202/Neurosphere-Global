@@ -1,20 +1,23 @@
 import { submissionSchema, submissionErrors } from "./submission";
 import { formDefinitions } from "@/content/forms";
-import { allowEnquiry, deliveryConfiguration } from "./enquiry-delivery";
+import { allowEnquiry } from "./enquiry-delivery";
+import { formDeliveryConfiguration } from "./form-delivery";
+import { emailSubmissionConfirmation, web3FormsPayload } from "./web3forms";
+import { hasSameOrigin } from "./request-origin";
 export async function handleSubmission(
   request: Request,
   fetcher: typeof fetch = fetch,
 ) {
   const reply = (body: unknown, status: number) =>
     Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
-  if (request.headers.get("origin") !== new URL(request.url).origin)
+  if (!hasSameOrigin(request))
     return reply({ error: "Please send this form from the website." }, 403);
   if (!request.headers.get("content-type")?.includes("application/json"))
     return reply({ error: "Unsupported request format." }, 415);
   if (Number(request.headers.get("content-length")) > 24000)
     return reply({ error: "Your request is too large." }, 413);
   const key =
-    process.env.TRUST_PROXY === "true"
+    process.env.VERCEL === "1" || process.env.TRUST_PROXY === "true"
       ? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
         "unknown"
       : "local";
@@ -54,7 +57,7 @@ export async function handleSubmission(
       },
       422,
     );
-  const configuration = deliveryConfiguration();
+  const configuration = formDeliveryConfiguration();
   if (!configuration)
     return reply(
       {
@@ -62,6 +65,20 @@ export async function handleSubmission(
           "Delivery is not yet available. Your details have not been sent. You can prepare a draft instead.",
       },
       503,
+    );
+  if (configuration.provider === "web3forms")
+    return reply(
+      {
+        delivery: {
+          provider: "web3forms",
+          payload: web3FormsPayload(parsed.data, configuration.accessKey),
+        },
+        confirmation: emailSubmissionConfirmation(
+          parsed.data.form,
+          parsed.data.intent,
+        ),
+      },
+      202,
     );
   try {
     const response = await fetcher(configuration.endpoint, {

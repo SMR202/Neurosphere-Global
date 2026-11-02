@@ -26,6 +26,7 @@ import {
 } from "./primitives";
 import { InterestForm } from "./interest-form";
 import { editorialText } from "@/lib/editorial";
+import { formDeliveryConfiguration } from "@/lib/form-delivery";
 import { Home } from "./home";
 import { Learn, StudentTable } from "./learn";
 import {
@@ -590,6 +591,33 @@ export function PageContent({
             {legalPages[path as keyof typeof legalPages]} information is being
             prepared.
           </Pending>
+          {path === "/privacy-policy" &&
+          formDeliveryConfiguration()?.provider === "web3forms" ? (
+            <div className="prose">
+              <h2>Website enquiries</h2>
+              <p>
+                When you submit a website form, the details you enter are sent
+                to Web3Forms to process the request and email it to
+                NeuroZehn@outlook.com. The website application does not save a
+                separate copy of your submission. Web3Forms and the receiving
+                email service may retain it under their own settings and
+                policies.
+              </p>
+              <p>
+                Please do not include personal medical information. For
+                questions about your submitted details, email
+                NeuroZehn@outlook.com.
+              </p>
+              <a
+                href="https://web3forms.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Web3Forms privacy policy
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          ) : null}
           <p className="section-lead">
             Our ethics and privacy page explains the institute’s current
             commitments.
