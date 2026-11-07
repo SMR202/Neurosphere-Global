@@ -76,8 +76,9 @@ export function Catalogue({
               ? [
                   c.format.match(/\d+ hours over \d+ weeks/)?.[0] ||
                     "Duration to be announced",
-                  "Online · Urdu & English",
-                  "Students PKR 2,000 · Professionals PKR 5,000",
+                  c.format.toLowerCase().includes("blended")
+                    ? "Blended learning"
+                    : "Online learning",
                 ]
               : ["Format and dates to be announced"],
           }))}

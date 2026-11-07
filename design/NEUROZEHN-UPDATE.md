@@ -1,5 +1,9 @@
 # NeuroZehn client update
 
+## Client direction — 7 November 2026
+
+The owner requested no fees or payment information on the initial website. This supersedes the earlier instruction to display the supplied fees. The Learn summary now presents subject, learning approach and certificate information; the fees section, catalogue prices, course-summary prices and scholarship form question are removed. Course descriptions retain format, duration, assessment and certificate text while omitting the source's fee sentence. Community-talk copy no longer makes a price claim, and the partner-support copy refers to training and research. No replacement prices or claim that all courses are free is introduced. Original documents and source extractions remain unchanged. Existing source-reconciliation and audit notes below describe the earlier revision where pricing was displayed.
+
 ## Source reconciliation
 
 The November client DOCX and six figures are preserved in `content/source/neurozehn/`. The complete 735-paragraph extraction is `paragraphs.json`. `aligned.json` projects updated paragraphs onto stable historical content IDs, preserving all existing routes and the earlier approved research/publication/resource collections. Source-specific additions include the full institute name, explanation of Zehn, early-2027 intake, actual fees/durations, prepared-by credits, two founders, eight scientific-team entries, reply times and supplied Urdu keys. Old names remain only in archived source documents and historical notes; active `src` has no former-name references.

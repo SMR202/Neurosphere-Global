@@ -3,10 +3,45 @@ import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import paragraphs from "../content/source/neurozehn/aligned.json";
-import { programmes } from "../src/content/client";
+import { courses, programmes, partnerTypes } from "../src/content/client";
 import { Home } from "../src/components/site/home";
+import { Learn } from "../src/components/site/learn";
+import { CourseDetail } from "../src/components/site/detail-pages";
 import { formDefinitions } from "../src/content/forms";
 import { draftText, emailHref, submissionSchema } from "../src/lib/submission";
+
+test("initial-phase learning pages and course forms publish no pricing or payment requests", () => {
+  const pricing =
+    /\bfees?\b|\bpayments?\b|\bPKR\b|\bscholarships?\b|2,000|5,000/i;
+  for (const locale of ["en", "ur"] as const) {
+    const learning = renderToStaticMarkup(createElement(Learn, { locale }));
+    assert.ok(!pricing.test(learning), locale + " Learn page");
+    assert.ok(learning.includes("Early 2027"));
+    assert.ok(learning.includes("Certificate of completion"));
+    for (const course of courses) {
+      const html = renderToStaticMarkup(
+        createElement(CourseDetail, {
+          course,
+          locale,
+          deliveryEnabled: false,
+        }),
+      );
+      assert.ok(!pricing.test(html), locale + " " + course.slug);
+      assert.ok(html.includes(course.title));
+      assert.ok(html.includes("Register interest") || html.includes("انتظار"));
+    }
+  }
+  assert.ok(
+    !formDefinitions.course.fields.some((field) => pricing.test(field.label)),
+  );
+  assert.ok(
+    !partnerTypes.some((partner) =>
+      pricing.test(partner.ask + " " + partner.offer),
+    ),
+  );
+  // Retain the original supplied figures in the archive, without publishing them.
+  assert.ok(paragraphs.some((paragraph) => paragraph.includes("PKR 2,000")));
+});
 
 test("homepage renders twelve separate, named programme destinations", () => {
   const html = renderToStaticMarkup(createElement(Home, { locale: "en" }));

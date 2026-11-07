@@ -77,9 +77,12 @@ test("all approved routes have metadata, unique addresses and usable locale vari
   assert.equal(routeLocale("/urgent").locale, "en");
   assert.equal(urdu["Learn"], "سیکھیں");
 });
-test("client supplied fees, contact and prepared-by details replace missing fields", () => {
+test("current contact and prepared-by details remain while initial-phase course pricing is unpublished", () => {
   assert.ok(copy(33).includes("Rescue 1122"));
   assert.ok(copy(317).includes("Prepared by Dr. Shahid Bashir"));
-  assert.ok(courses[0].format?.includes("PKR 2,000"));
+  assert.ok(courses[0].format?.includes("6 hours over 3 weeks"));
+  assert.ok(
+    !courses.some((course) => /\bFee:|\bPKR\b/i.test(course.format || "")),
+  );
   assert.ok(copy(31).includes("Registration in progress"));
 });

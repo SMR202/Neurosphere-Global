@@ -7,8 +7,7 @@ export function editorialText(text: string): string {
     )
     .replace("[hours] over [weeks]", "duration to be announced")
     .replaceAll("[hours]", "duration to be announced")
-    .replace("Fee: [fee].", "Fees will be announced before enrolment.")
-    .replace("[fee levels]", "fee levels to be announced before enrolment")
+    .replace(/\s*Fee: \[fee\]\./g, "")
     .replace("[to be confirmed]", "(measures to be confirmed)")
     .replace(
       /Content reviewed by \[reviewer name and role\], \[date\]\./g,

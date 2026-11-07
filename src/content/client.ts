@@ -91,7 +91,13 @@ export const courses: Course[] = courseSpecs.map(
     status: i < 5 ? "Opening soon" : "In planning",
     description: copy(description),
     outcomes: start ? lines(start, end) : [],
-    format: format ? copy(format) : undefined,
+    // Client direction, 7 November 2026: no public pricing in the initial phase.
+    // Keep the supplied source intact; publish the learning details only.
+    format: format
+      ? copy(format)
+          .replace(/\s*Fee:[\s\S]*$/i, "")
+          .trim()
+      : undefined,
   }),
 );
 export const programmes = Array.from({ length: 12 }, (_, i) => ({
@@ -130,7 +136,7 @@ export const studentTracks = Array.from({ length: 9 }, (_, i) => ({
 }));
 export const partnerTypes = Array.from({ length: 7 }, (_, i) => ({
   type: copy(471 + i * 3),
-  offer: copy(472 + i * 3),
+  offer: copy(472 + i * 3).replace("scholarships, training", "training"),
   ask: copy(473 + i * 3),
 }));
 export const roadmap = Array.from({ length: 4 }, (_, i) => ({

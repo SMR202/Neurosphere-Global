@@ -91,9 +91,9 @@ function BrainHealth({ locale }: { locale: Locale }) {
       </Section>
       <section className="partner-band">
         <div className="container">
-          <h2>{copy(329)}</h2>
+          <h2>{copy(329).replace(/^Free\s+/, "")}</h2>
           <div>
-            <p>{copy(330)}</p>
+            <p>{copy(330).replace(/^Free\s+/, "")}</p>
             <Action
               href="/join?interests=Brain-health%20guides"
               locale={locale}

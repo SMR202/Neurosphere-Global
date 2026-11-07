@@ -52,14 +52,7 @@ export function CourseDetail({
               <dt>Duration</dt>
               <dd>
                 {course.format?.match(/\d+ hours over \d+ weeks/)?.[0] ||
-                  "6–12 hours over 3–6 weeks"}
-              </dd>
-            </div>
-            <div>
-              <dt>First-intake fees</dt>
-              <dd>
-                Students PKR 2,000 · Professionals PKR 5,000 · Scholarship
-                places free
+                  "To be announced"}
               </dd>
             </div>
             <div>
@@ -116,10 +109,7 @@ export function CourseDetail({
                   Format, duration and assessment details will be announced
                   before enrolment.
                 </p>
-                <p>
-                  You receive a certificate of completion. Fees will be
-                  announced before enrolment.
-                </p>
+                <p>You receive a certificate of completion.</p>
               </>
             )}
             <p>{copy(100)}</p>

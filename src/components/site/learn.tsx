@@ -4,7 +4,6 @@ import { copy, courses, studentTracks } from "@/content/client";
 import type { Locale } from "@/lib/locale";
 import { Action, Section, TextLink } from "./primitives";
 import { Catalogue } from "./catalogue";
-import { editorialText } from "@/lib/editorial";
 export function StudentTable() {
   return (
     <div
@@ -39,8 +38,12 @@ export function Learn({ locale }: { locale: Locale }) {
     <>
       <section className="container learning-hero">
         <div className="hero-copy">
-          <h1>Learn brain health in practice.</h1>
-          <p>{copy(92)}</p>
+          <h1 lang="en" dir="ltr">
+            Learn brain health in practice.
+          </h1>
+          <p lang="en" dir="ltr">
+            {copy(92)}
+          </p>
           <div className="hero-actions">
             <Action href="#catalogue" locale={locale}>
               See the catalogue
@@ -55,20 +58,20 @@ export function Learn({ locale }: { locale: Locale }) {
           <strong>Early 2027</strong>
           <dl>
             <div>
-              <dt>Students</dt>
-              <dd>PKR 2,000</dd>
+              <dt>Focus</dt>
+              <dd>Brain &amp; mental health</dd>
             </div>
             <div>
-              <dt>Professionals</dt>
-              <dd>PKR 5,000</dd>
+              <dt>Approach</dt>
+              <dd>Short, practical modules</dd>
             </div>
             <div>
-              <dt>Scholarship places</dt>
-              <dd>Free</dd>
+              <dt>Award</dt>
+              <dd>Certificate of completion</dd>
             </div>
           </dl>
-          <span>
-            Short modules. Practical learning. Certificate of completion.
+          <span lang="en" dir="ltr">
+            Register interest to hear when enrolment opens.
           </span>
         </div>
       </section>
@@ -92,9 +95,6 @@ export function Learn({ locale }: { locale: Locale }) {
           <p>{copy(171)}</p>
         </div>
       </section>
-      <Section title="Fees and scholarships">
-        <p className="section-lead">{editorialText(copy(173))}</p>
-      </Section>
       <Section title="Questions and answers" className="faq-section">
         {[
           [175, 176],

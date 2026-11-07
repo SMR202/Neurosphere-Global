@@ -2,6 +2,8 @@
 
 Current source: the November NeuroZehn DOCX in `content/source/neurozehn/`. The rebrand, supplied Outlook contact, fees, durations, early-2027 intake, founders, scientific team and Urdu keys supersede earlier source versions. See `design/NEUROZEHN-UPDATE.md` for the design, audit repairs and verification. Forms offer an explicit email-app handoff to NeuroZehn@outlook.com when server delivery is unconfigured.
 
+Client direction, 7 November 2026: publish no fees or payment information during the initial phase. Course pricing, the fees section and scholarship enquiry field are removed from the public presentation. Learning formats are published without the source's fee sentence; original supplied documents remain archived unchanged. This does not declare all programmes free.
+
 Next.js website combining the original approved research website, the linked Phase 1 Google Doc and the October 2026 ready-to-paste copy. The DOCX supplies the current brand presentation and new learning/institute sections; it does not erase previously approved research or people. Source snapshots and the exact DOCX are retained in `content/source/`. See `design/CONTENT-RECONCILIATION.md` for the source decisions.
 
 ## Run

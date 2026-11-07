@@ -1,12 +1,7 @@
 import { courses, partnerTypes, copy } from "./client";
 import { editorialText } from "@/lib/editorial";
 export type FormKind =
-  | "waitlist"
-  | "course"
-  | "student"
-  | "partner"
-  | "research"
-  | "contact";
+  "waitlist" | "course" | "student" | "partner" | "research" | "contact";
 export type FormField = {
   name: string;
   label: string;
@@ -119,12 +114,6 @@ export const formDefinitions: Record<
         type: "select",
         required: true,
         options: courses.map((c) => c.title),
-      },
-      {
-        name: "scholarship",
-        label: "Scholarship needed",
-        type: "select",
-        options: ["Yes", "No"],
       },
       consent,
     ],
