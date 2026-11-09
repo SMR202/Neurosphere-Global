@@ -584,50 +584,75 @@ export function PageContent({
       <>
         <Intro
           title={legalPages[path as keyof typeof legalPages]}
-          description="For questions about this information, please contact the institute."
+          description={
+            path === "/privacy-policy"
+              ? "How NeuroZehn approaches privacy and handles information shared through this website."
+              : "For questions about this information, please contact the institute."
+          }
         />
         <Section>
-          <Pending>
-            {legalPages[path as keyof typeof legalPages]} information is being
-            prepared.
-          </Pending>
-          {path === "/privacy-policy" &&
-          formDeliveryConfiguration()?.provider === "web3forms" ? (
+          {path === "/privacy-policy" ? (
             <div className="prose">
-              <h2>Website enquiries</h2>
+              <h2>Our privacy commitment</h2>
               <p>
-                When you submit a website form, the details you enter are sent
-                to Web3Forms to process the request and email it to
-                NeuroZehn@outlook.com. The website application does not save a
-                separate copy of your submission. Web3Forms and the receiving
-                email service may retain it under their own settings and
-                policies.
+                {copy(580)}
               </p>
+              <h2>Website enquiries</h2>
+              {formDeliveryConfiguration()?.provider === "web3forms" ? (
+                <>
+                  <p>
+                    When you submit a website form, the details you enter are
+                    sent to Web3Forms to process the request and email it to
+                    NeuroZehn@outlook.com. The website application does not
+                    save a separate copy of your submission. Web3Forms and the
+                    receiving email service may retain it under their own
+                    settings and policies.
+                  </p>
+                  <a
+                    href="https://web3forms.com/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Web3Forms privacy policy
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </>
+              ) : (
+                <p>
+                  The website prepares an email with the information you enter.
+                  Your email app opens so you can review it and choose whether
+                  to send it to NeuroZehn@outlook.com. The information is not
+                  sent by the website form itself.
+                </p>
+              )}
               <p>
                 Please do not include personal medical information. For
                 questions about your submitted details, email
                 NeuroZehn@outlook.com.
               </p>
-              <a
-                href="https://web3forms.com/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Web3Forms privacy policy
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
+              <p>
+                Our wider commitments for research and education are on the
+                <TextLink href="/ethics-privacy" locale={locale}>
+                  Ethics, privacy and responsible use
+                </TextLink>
+                page. For questions about privacy, contact
+                <a href="mailto:NeuroZehn@outlook.com">
+                  NeuroZehn@outlook.com
+                </a>
+                .
+              </p>
             </div>
-          ) : null}
-          <p className="section-lead">
-            Our ethics and privacy page explains the institute’s current
-            commitments.
-          </p>
-          <TextLink href="/ethics-privacy" locale={locale}>
-            Ethics and privacy
-          </TextLink>
-          <TextLink href="/contact" locale={locale}>
-            Contact us
-          </TextLink>
+          ) : (
+            <>
+              <Pending>
+                {legalPages[path as keyof typeof legalPages]} information is
+                being prepared.
+              </Pending>
+              <TextLink href="/contact" locale={locale}>
+                Contact us
+              </TextLink>
+            </>
+          )}
         </Section>
       </>
     );

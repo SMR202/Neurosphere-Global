@@ -29,10 +29,12 @@ export type TeamMember = {
   slug: string;
   name: string;
   initials: string;
-  role?: string;
-  bio?: string;
+  role: string;
+  bio: string;
+  biography?: string[];
   image?: string;
-  expertise?: string;
+  expertise: string;
+  affiliation?: string;
 };
 export type Dataset = {
   slug: string;

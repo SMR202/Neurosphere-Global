@@ -3,7 +3,6 @@ import { team } from "@/data/team";
 import { overview } from "@/data/site";
 
 import { researchAreas, externalDataSources } from "@/content/reconciled";
-import { copy } from "@/content/client";
 import { type Locale } from "@/lib/locale";
 import { Intro, Section, TextLink, Action } from "./primitives";
 import { ResearchLibrary } from "./research-library";
@@ -72,60 +71,81 @@ export function ProjectsPage({ locale }: { locale: Locale }) {
 export function PeoplePage({ locale }: { locale: Locale }) {
   return (
     <>
-      <Intro title="The people building NeuroZehn" description={copy(553)} />
+      <Intro
+        title="Our people"
+        description="NeuroZehn brings together a growing, multidisciplinary network of neuroscientists, neurologists, clinicians, rehabilitation specialists and computational scientists. The team combines expertise in clinical neuroscience, neurotechnology, brain stimulation, neurological disorders, artificial intelligence and translational research. We are at the founding stage, and our team and advisers will keep growing."
+      />
       <Section className="team-profiles">
-        <h2 className="sr-only">Research team</h2>
+        <h2 className="sr-only">Scientific team</h2>
         {team.map((person) => (
           <article className="team-profile" key={person.slug} id={person.slug}>
             <div className="team-monogram">
-              {person.role ? <p>{person.role}</p> : null}
-              <span aria-hidden="true">{person.initials}</span>
+              <span className="team-role">{person.role}</span>
+              <span className="team-initials" aria-hidden="true">
+                {person.initials}
+              </span>
             </div>
             <div>
               <h2>{person.name}</h2>
-              {person.bio ? (
-                <div className="team-biography">
-                  <p>
-                    {person.bio.split(/ (?=PhD in|210\+|Research spans)/)[0]}
-                  </p>
+              <p className="team-expertise">{person.expertise}</p>
+              <div className="team-biography">
+                <p>{person.bio}</p>
+                {person.biography?.length ? (
                   <details>
-                    <summary>Read biography</summary>
-                    {person.bio
-                      .split(/ (?=PhD in|210\+|Research spans)/)
-                      .slice(1)
-                      .map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
+                    <summary>Read full profile</summary>
+                    {person.biography.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
                   </details>
-                </div>
-              ) : (
-                <p className="team-bio-pending">Founder of NeuroZehn.</p>
-              )}
+                ) : null}
+              </div>
             </div>
           </article>
         ))}
       </Section>
-      <Section title="Scientific team">
-        <div className="scientific-team">
-          <p>Dr. Mirza Obaid Baig</p>
-          <p>Dr. Kaleem Maqsood</p>
-          <p>Dr. Kaleem Imdad Hussain</p>
-          <p>Dr. Sumaiyah Obaid</p>
-          <p>Dr. Aneesa Zafar</p>
-          <p>Dr. Hamid Khan</p>
-          <p>Prof. Dieter Ruegg</p>
-          <p>Dr. Ali Hamza</p>
+      <Section title="An international research network">
+        <div className="prose team-network-copy">
+          <p>
+            NeuroZehn is building an international network of scientific
+            collaborators, academic institutions, clinical researchers and
+            technology specialists. This structure is intended to support
+            collaborative projects, joint publications, research grants,
+            student mentorship, clinical studies and new approaches to brain
+            health.
+          </p>
+          <p>
+            Additional collaborators and scientific advisers will be
+            introduced as the network grows. Members of the scientific team
+            take part as individuals. Institutions are named only to identify
+            each person and do not mean that the institution endorses
+            NeuroZehn.
+          </p>
         </div>
-        <p>
-          More collaborators and advisers will be listed here as they confirm.
-        </p>
+      </Section>
+      <Section title="Scientific advice and research integrity">
+        <div className="prose team-network-copy">
+          <p>
+            We are developing a Scientific Advisory Board and an Ethics and
+            Research Integrity Committee to support NeuroZehn’s scientific
+            direction, research quality, responsible innovation and
+            international collaborations.
+          </p>
+          <p>
+            We welcome expressions of interest from experienced
+            neuroscientists, neurologists, clinicians, biomedical scientists,
+            neurotechnology specialists, AI researchers, and experts in
+            research ethics and governance who wish to contribute to our
+            mission.
+          </p>
+        </div>
       </Section>
       <section className="partner-band">
         <div className="container">
-          <h2>Clinicians. Educators. Scientists.</h2>
+          <h2>Interested in joining our scientific network?</h2>
           <div>
             <p>
-              Connect with the team about research, teaching or collaboration.
+              We welcome collaborations, advisory contributions and
+              opportunities for joint research.
             </p>
             <Action href="/contact?topic=Collaboration" locale={locale}>
               Contact us

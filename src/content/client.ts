@@ -20,7 +20,11 @@ export const pageCopy = {
   "/research": { title: copy(388), description: copy(390) },
   "/partner": { title: copy(459), description: copy(461) },
   "/about": { title: copy(506), description: copy(508) },
-  "/people": { title: copy(549), description: copy(551) },
+  "/people": {
+    title: "Our people | NeuroZehn",
+    description:
+      "NeuroZehn brings together a multidisciplinary network of neuroscientists, neurologists, clinicians, rehabilitation specialists and computational scientists.",
+  },
   "/insights": { title: copy(559), description: copy(561) },
   "/ethics-privacy": { title: copy(574), description: copy(576) },
   "/contact": { title: copy(591), description: copy(593) },
@@ -233,7 +237,10 @@ export function getPageInfo(path: string) {
   if (path in legalPages)
     return {
       title: `${legalPages[path as keyof typeof legalPages]} | NeuroZehn`,
-      description: "Policy text is awaiting approval.",
+      description:
+        path === "/privacy-policy"
+          ? "NeuroZehn’s privacy commitments and how information submitted through this website is handled."
+          : "Policy text is awaiting approval.",
     };
   const article = /^\/insights\/([1-6])$/.exec(path);
   if (article)

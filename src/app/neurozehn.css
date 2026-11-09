@@ -1155,70 +1155,93 @@ a {
 .team-profiles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
+  gap: 0 52px;
 }
 .team-profiles > .sr-only {
   position: absolute;
 }
 .team-profile {
   display: block;
-  padding-block: 26px;
+  padding-block: 30px;
   border-top: 1px solid var(--border);
 }
 .team-monogram {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 22px;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 14px;
   border: 0;
   padding: 0;
 }
-.team-monogram p {
-  font-size: 14px;
+.team-role {
+  max-width: 32ch;
+  padding-top: 4px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.015em;
 }
-.team-monogram > span {
+.team-monogram > .team-role {
+  display: block;
+  font-family: var(--font-reading), sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+.team-monogram > .team-initials {
+  flex: 0 0 auto;
+  display: block;
+  font-family: var(--font-reading);
   color: var(--primary);
-  font-size: 42px;
-  font-weight: 650;
+  font-size: 34px;
+  font-weight: 500;
   line-height: 1;
 }
 .team-profile h2 {
-  font-size: 29px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
+  font-size: clamp(23px, 2vw, 29px);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.team-expertise {
+  margin-bottom: 15px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.6;
 }
 .team-biography {
   display: block;
+  columns: 1;
   column-count: 1;
   column-gap: normal;
 }
 .team-biography p,
 .team-bio-pending {
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.75;
 }
 .team-biography details {
-  margin-top: 18px;
+  margin-top: 14px;
   font-size: 15px;
 }
 .team-biography summary {
+  width: fit-content;
   color: var(--primary);
   font-weight: 650;
+  cursor: pointer;
+  text-underline-offset: 4px;
+}
+.team-biography summary:hover {
+  text-decoration: underline;
 }
 .team-biography details p {
   margin-top: 18px;
 }
-.scientific-team {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 30px;
-  margin-bottom: 22px;
-}
-.scientific-team p {
-  border-top: 1px solid var(--border);
-  padding-block: 20px;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--foreground);
+.team-network-copy {
+  max-width: 74ch;
 }
 .mission-section {
   gap: 60px;
@@ -1801,9 +1824,6 @@ html[dir="rtl"] .interest-form {
   }
   .form-section > div > p {
     margin-top: 12px;
-  }
-  .scientific-team {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .footer-main {
     gap: 35px;
@@ -2425,8 +2445,14 @@ html[dir="rtl"] .interest-form {
   .team-profile h2 {
     font-size: 28px;
   }
-  .scientific-team {
-    grid-template-columns: 1fr;
+  .team-profiles {
+    gap: 0;
+  }
+  .team-profile {
+    padding-block: 24px;
+  }
+  .team-profile h2 {
+    font-size: 26px;
   }
   .mission-section {
     grid-template-columns: 1fr;
