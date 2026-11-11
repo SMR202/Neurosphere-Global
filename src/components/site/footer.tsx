@@ -51,6 +51,7 @@ export function Footer({ locale }: { locale: Locale }) {
                 ["People", "/people"],
                 ["Insights", "/insights"],
                 ["Contact", "/contact"],
+                ["Share feedback", "/contact?topic=Website%20feedback"],
               ],
             },
           ].map((group) => (

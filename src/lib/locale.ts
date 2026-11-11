@@ -61,6 +61,8 @@ export function routeLocale(path: string) {
 // Client supplied Urdu keys.
 Object.assign(urdu, {
   "Choose your updates": "اپنی پسند کی معلومات منتخب کریں",
+  "Share feedback": "رائے دیں",
+  "Website feedback": "ویب سائٹ کے بارے میں رائے",
   "NeuroZehn Institute for Brain Health & Neuroscience":
     "نیوروذہن انسٹی ٹیوٹ برائے دماغی صحت و اعصابی سائنس",
   "Brain health, learned and built together.":

@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { getFormDefinition, type FormKind } from "@/content/forms";
+import {
+  getFormDefinition,
+  getFormTitle,
+  type FormKind,
+} from "@/content/forms";
 import type { Submission } from "./submission";
 
 export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
@@ -19,6 +23,7 @@ export const web3FormsPayloadSchema = z
 
 export function web3FormsPayload(data: Submission, accessKey: string) {
   const definition = getFormDefinition(data.form, data.intent);
+  const title = getFormTitle(data.form, data.intent, data.values);
   const entries = definition.fields.flatMap((field) => {
     const value = data.values[field.name];
     const text = Array.isArray(value) ? value.join(", ") : (value || "").trim();
@@ -30,11 +35,11 @@ export function web3FormsPayload(data: Submission, accessKey: string) {
   const name = String(data.values.name || "").trim();
   return web3FormsPayloadSchema.parse({
     access_key: accessKey,
-    subject: `NeuroZehn — ${definition.title}`,
+    subject: `NeuroZehn — ${title}`,
     from_name: "NeuroZehn website",
     email: String(data.values.email).trim(),
     ...(name ? { name } : {}),
-    message: [definition.title, ...entries].join("\n\n"),
+    message: [title, ...entries].join("\n\n"),
     botcheck: false,
   });
 }

@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { getFormDefinition, type FormKind } from "@/content/forms";
+import {
+  getFormDefinition,
+  getFormTitle,
+  type FormKind,
+} from "@/content/forms";
 export const submissionSchema = z
   .object({
     form: z.enum([
@@ -86,7 +90,7 @@ export function draftText(
   intent?: "brief",
 ) {
   return [
-    "NeuroZehn — " + getFormDefinition(form, intent).title,
+    "NeuroZehn — " + getFormTitle(form, intent, values),
     "DRAFT — NOT SENT",
     "",
     ...getFormDefinition(form, intent)
@@ -109,5 +113,9 @@ export function emailHref(form: FormKind, text: string, intent?: "brief") {
     "DRAFT — NOT SENT",
     "Enquiry prepared on the NeuroZehn website",
   );
-  return `mailto:NeuroZehn@outlook.com?subject=${encodeURIComponent("NeuroZehn — " + getFormDefinition(form, intent).title)}&body=${encodeURIComponent(body)}`;
+  const title =
+    text
+      .split("\n", 1)[0]
+      ?.replace(/^NeuroZehn — /, "") || getFormDefinition(form, intent).title;
+  return `mailto:NeuroZehn@outlook.com?subject=${encodeURIComponent("NeuroZehn — " + title)}&body=${encodeURIComponent(body)}`;
 }

@@ -47,6 +47,7 @@ export const contactTopics = [
   "Partnerships",
   "Research participation",
   "Media",
+  "Website feedback",
 ];
 export const formDefinitions: Record<
   FormKind,
@@ -279,4 +280,14 @@ export function getFormDefinition(form: FormKind, intent?: "brief") {
         : field,
     ),
   };
+}
+
+export function getFormTitle(
+  form: FormKind,
+  intent?: "brief",
+  values?: Record<string, string | string[]>,
+) {
+  if (form === "contact" && values?.topic === "Website feedback")
+    return "Website feedback";
+  return getFormDefinition(form, intent).title;
 }

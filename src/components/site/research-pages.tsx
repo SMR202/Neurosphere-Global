@@ -147,9 +147,17 @@ export function PeoplePage({ locale }: { locale: Locale }) {
               We welcome collaborations, advisory contributions and
               opportunities for joint research.
             </p>
-            <Action href="/contact?topic=Collaboration" locale={locale}>
-              Contact us
-            </Action>
+            <div className="hero-actions">
+              <Action href="/contact?topic=Collaboration" locale={locale}>
+                Contact us
+              </Action>
+              <TextLink
+                href="/contact?topic=Website%20feedback"
+                locale={locale}
+              >
+                Share feedback
+              </TextLink>
+            </div>
           </div>
         </div>
       </section>

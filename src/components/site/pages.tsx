@@ -364,16 +364,23 @@ function Contact({
   deliveryEnabled: boolean;
   query: Record<string, string>;
 }) {
+  const feedbackMode = query.topic === "Website feedback";
   return (
     <>
       <Intro title={copy(595)} description={copy(596)} />
       <div className="container contact-layout">
         <aside className="contact-directory">
-          <h2>One team. A direct conversation.</h2>
+          <h2>
+            {feedbackMode ? "Help us improve the website." : "One team. A direct conversation."}
+          </h2>
           <a className="contact-email" href="mailto:NeuroZehn@outlook.com">
             NeuroZehn@outlook.com
           </a>
-          <p>We reply within two working days.</p>
+          <p>
+            {feedbackMode
+              ? "Tell us what was helpful, what was difficult to find, or what we could make clearer."
+              : "We reply within two working days."}
+          </p>
         </aside>
         <InterestForm
           kind="contact"
@@ -387,9 +394,11 @@ function Contact({
                 : "General",
             message:
               query.message ||
-              (query.type === "Research guidance"
-                ? `Research guidance enquiry${query.area ? ` — ${query.area}` : ""}${query.topic ? `: ${query.topic}` : ""}`
-                : ""),
+              (feedbackMode
+                ? "Feedback about the NeuroZehn website:\n\n"
+                : query.type === "Research guidance"
+                  ? `Research guidance enquiry${query.area ? ` — ${query.area}` : ""}${query.topic ? `: ${query.topic}` : ""}`
+                  : ""),
           }}
         />
         <p className="contact-boundary">
